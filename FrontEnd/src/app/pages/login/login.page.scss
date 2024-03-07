@@ -1,0 +1,47 @@
+.login {
+    min-height: 100vh;
+  
+    &__wrapper-redes {
+      max-width: 250px;
+  
+      .btn-redes {
+        width: 55px;
+        height: 55px;
+        --border-radius: 100%;
+      }
+    }
+  
+    &__logo {
+      text-decoration: none;
+      font-family: 'mrDafoe';
+      color: var(--ion-color-primary);
+      font-size: 4rem;
+    }
+    &__esqueceu-senha {
+      font-size: 0.9em;
+      font-weight: bold;
+      margin-left: 15px;
+    }
+  
+    .input-container {
+      min-height: 80px;
+  
+      .erro {
+        font-size: .8em;
+      }
+    }
+  
+    &__entrar-com {
+      &::after,
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 12vw;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 4px;
+        height: 1px;
+        background-color: var(--ion-color-primary);
+      }
+    }
+  }
