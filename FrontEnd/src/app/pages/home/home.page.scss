@@ -2,7 +2,7 @@
     background-image: url('../../../assets/img/background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    height: 90vh !important;
+    min-height: 90vh !important;
     ion-text{
         font-size: 2rem;
         margin-bottom: 20px;

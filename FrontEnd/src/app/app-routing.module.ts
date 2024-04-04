@@ -23,6 +23,14 @@ const routes: Routes = [
     path: 'grade-curricular',
     loadChildren: () => import('./pages/grade-curricular/grade-curricular.module').then( m => m.GradeCurricularPageModule)
   },
+  {
+    path: 'grafico',
+    loadChildren: () => import('./pages/grafico/grafico.module').then( m => m.GraficoPageModule)
+  },
+  {
+    path: 'conscientizacao',
+    loadChildren: () => import('./pages/conscientizacao/conscientizacao.module').then( m => m.ConscientizacaoPageModule)
+  },
 ];
 
 @NgModule({
