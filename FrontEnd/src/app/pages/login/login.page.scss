@@ -14,8 +14,13 @@
     &__logo {
       text-decoration: none;
       font-family: 'mrDafoe';
-      color: var(--ion-color-primary);
       font-size: 4rem;
+      color: #000000;
+    }
+
+    &__link{
+      text-decoration: none;
+      color: #000000;
     }
     &__esqueceu-senha {
       font-size: 0.9em;
@@ -41,7 +46,7 @@
         margin-right: 10px;
         margin-bottom: 4px;
         height: 1px;
-        background-color: var(--ion-color-primary);
+        background-color: var(--ion-color-dark);
       }
     }
   }
