@@ -1,8 +1,5 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { HttpResponse } from '@capacitor/core';
+import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -12,9 +9,7 @@ import { HttpResponse } from '@capacitor/core';
 export class CadastroPage implements OnInit {
 
 
-
-  @ViewChild('cadastroForm') private cadastoForm!: NgForm;
-
+  constructor(private Usuario: UsuarioService) { }
   erros: any = {};
   loading: boolean = false;
 
@@ -23,6 +18,25 @@ export class CadastroPage implements OnInit {
 
   public cadastrar() {
     this.loading = true;
-    const cliente = this.cadastoForm.form.value;
+    // const usuario = this.cadastoForm.form.value;
+    const usuario = {
+      nome: "teste",
+      email: "teste@teste.com",
+      telefone: 981045269,
+      senha: "teste"
+    }
+
+    console.log(usuario)
+
+
+    this.Usuario.cadastrarDados(usuario).subscribe(
+      response => {
+        console.log('Dados cadastrados com sucesso!', response);
+      },
+      error => {
+        console.error('Erro ao cadastrar os dados:', error);
+      }
+    );
+
   }
 }
