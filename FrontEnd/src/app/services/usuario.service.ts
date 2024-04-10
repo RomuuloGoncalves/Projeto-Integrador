@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ServerService } from './server.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +9,11 @@ import { Observable } from 'rxjs';
 
 export class UsuarioService {
 
-  private apiUrl = 'http://localhost/Projeto-Integrador/System/views/usuario/cadastrar.php'; // Substitua pela URL da sua API PHP
 
-  constructor(private http: HttpClient) { }
+  constructor(private Server: ServerService) { }
 
   cadastrarDados(dados: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, dados);
+    // return this.http.post<any>(this.apiUrl, dados);
+    return this.Server.post('/usuario/cadastrar.php', dados);
   }
 }
