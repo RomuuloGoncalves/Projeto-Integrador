@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'conscientizacao',
     loadChildren: () => import('./pages/conscientizacao/conscientizacao.module').then( m => m.ConscientizacaoPageModule)
   },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
+  },
 ];
 
 @NgModule({
