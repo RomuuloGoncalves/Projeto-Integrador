@@ -35,6 +35,14 @@ const routes: Routes = [
     path: 'perfil',
     loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
   },
+  {
+    path: 'cadastro-arduino',
+    loadChildren: () => import('./pages/cadastro-arduino/cadastro-arduino.module').then( m => m.CadastroArduinoPageModule)
+  },
+  {
+    path: 'cadastro-sensor',
+    loadChildren: () => import('./pages/cadastro-sensor/cadastro-sensor.module').then( m => m.CadastroSensorPageModule)
+  },
 ];
 
 @NgModule({

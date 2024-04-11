@@ -8,7 +8,7 @@ if ($method == "OPTIONS") {
     die();
 }
 
-if ($_SERVER['REQUEST_METHOD'] !== 'PUT'){
+if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
     http_response_code(405);
     echo json_encode([
         'success' => 0,
@@ -20,13 +20,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'PUT'){
 $data = json_decode(file_get_contents("php://input"));
 $id = $data->id;
 
-try{
+try {
     $put = "SELECT * FROM `usuario` WHERE id_usuario=:id";
     $stmt = $conn->prepare($put);
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
 
-    if ($stmt->rowCount() > 0){
+    if ($stmt->rowCount() > 0) {
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -54,21 +54,18 @@ try{
             ]);
             exit;
         }
-    
+
         echo json_encode([
             'success' => 0,
             'message' => 'Há algum problema na alteração de dados'
         ]);
         exit;
-    
-    } 
-    }catch (PDOException $e) {
-        http_response_code(500);
-        echo json_encode([
-            'success' => 0,
-            'message' => $e->getMessage()
-        ]);
-        exit;
     }
-
-?>
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode([
+        'success' => 0,
+        'message' => $e->getMessage()
+    ]);
+    exit;
+}

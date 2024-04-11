@@ -2,6 +2,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { ToastService } from 'src/app/services/toast.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +13,14 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  constructor() { }
-
   @ViewChild('loginForm') private loginForm!: NgForm;
 
+  constructor(
+    private Usuario: UsuarioService,
+    private Toast: ToastService,
+    private router: Router,
+    private Cookie: CookieService,
+  ) { }
   erros: any = {};
   loading: boolean = false;
 
@@ -21,8 +28,37 @@ export class LoginPage implements OnInit {
   }
 
   public login() {
-   
+    this.loading = true;
+    const usuario = this.loginForm.form.value;
+    console.log(usuario)
+    this.Usuario.login(usuario).subscribe(
+      (response: any) => {
+        console.log(response)
+        this.erros = {};
+        if (response.token) {
+          const dataExpCookie = new Date();
+          dataExpCookie.setDate(dataExpCookie.getDate() + 15);
+          this.Cookie.set('token', response.token, {
+            expires: dataExpCookie,
+          });
 
-  
+          this.loginForm.reset();
+          this.router.navigate(['/']);
+          setTimeout(() => {
+            location.reload();
+          }, 200);
+          this.Toast.mostrarToast('success', 'Login realizado com sucesso');
+        }
+
+        this.loading = false;
+      },
+
+      (badReponse: HttpErrorResponse) => {
+        this.Toast.mostrarToast('danger', 'Login realizado com sucesso');
+
+        this.loading = false;
+      }
+    )
   }
+
 }
