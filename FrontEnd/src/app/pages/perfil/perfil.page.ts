@@ -12,4 +12,5 @@ export class PerfilPage implements OnInit {
   ngOnInit() {
   }
 
+   loop:any = [,,,,,,,,,,,,,]
 }
