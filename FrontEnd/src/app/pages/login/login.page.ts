@@ -42,6 +42,14 @@ export class LoginPage implements OnInit {
             expires: dataExpCookie,
           });
 
+          this.Cookie.set('nome_usuario', response.nome, {
+            expires: dataExpCookie,
+          });
+
+          this.Cookie.set('id_usuario', response.id_usuario, {
+            expires: dataExpCookie,
+          });
+
           this.loginForm.reset();
           this.router.navigate(['/']);
           setTimeout(() => {

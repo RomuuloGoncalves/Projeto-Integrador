@@ -1,6 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { ArduinoService } from 'src/app/services/arduino.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-perfil',
@@ -9,17 +12,34 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class PerfilPage implements OnInit {
 
-  constructor(private Arduino: ArduinoService, private Toast: ToastService) { }
+  constructor(private Arduino: ArduinoService, private Toast: ToastService, private Usuario: UsuarioService, private Cookie: CookieService) { }
 
   ngOnInit() {
-    this.listarArduinos()
+    this.carregarPerfil()
   }
   loading = false;
-
-   arduinos:any = []
+  arduinos: any = []
+  usuario!:any
+  nome_usuario?: string = this.Usuario.nome_usuario 
+  id_usuario: any = (this.Usuario.id_usuario) 
+  
+  private carregarPerfil() {
+    this.Usuario.pegarUsuario(this.Usuario.id_usuario).subscribe(
+      (response: any) => {
+        this.usuario = response;
+        
+        this.listagemArduino(this.id_usuario)
    
-   listarArduinos(){
-    this.Arduino.listarArduino().subscribe(
+      },
+      (badResponde: HttpErrorResponse) => {
+        console.log(badResponde);
+        this.loading = false;
+      }
+    );
+  }
+
+  listagemArduino(id_usuario: number) {
+    this.Arduino.listarArduinoUsuario(id_usuario).subscribe(
       response => {
         this.arduinos = response
         this.loading = false;
@@ -36,5 +56,5 @@ export class PerfilPage implements OnInit {
         this.Toast.mostrarToast(tipo, mensagem);
       }
     );
-   }
+  }
 }

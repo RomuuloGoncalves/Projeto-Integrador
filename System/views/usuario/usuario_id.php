@@ -19,10 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 $data = json_decode(file_get_contents("php://input"));
 $id = $data->id;
-$id = $_GET['id'];  
 
 
-$sql = "SELECT * FROM `arduino` WHERE `id_usuario` = :id";
+$sql = "SELECT * FROM `usuario` WHERE `id_usuario` = :id";
 $stmt = $conn->prepare($sql);
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $stmt->execute();

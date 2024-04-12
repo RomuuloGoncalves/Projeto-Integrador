@@ -12,7 +12,8 @@ export class ArduinoService {
   cadastrarDados(dados: any): Observable<any> {
     return this.Server.post('/views/arduino/cadastrar.php', dados);
   }
-  listarArduino(){
-    return this.Server.get('/views/arduino/listar.php');
+  listarArduinoUsuario(id:number){
+
+    return this.Server.get(`/views/arduino/listar_com_id.php?id=${id}`);
   }
 }

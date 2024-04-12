@@ -37,5 +37,7 @@ export class LogedGuard implements CanActivate {
     this.Toast.mostrarToast('danger', 'Para acessar o recurso, deve estar logado!')
     this.router.navigate(['login']);
     this.Cookie.delete('token');
+    this.Cookie.delete('id_usuario');
+    this.Cookie.delete('nome_usuario');
   }
 }

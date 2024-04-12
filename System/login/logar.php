@@ -6,7 +6,7 @@ include './criarJwt.php';
 $data = json_decode(file_get_contents("php://input"));
 
 try {
-	$sql = "SELECT `id_usuario` FROM `usuario` WHERE email=:email AND senha=:senha";
+	$sql = "SELECT `id_usuario`, `nome` FROM `usuario` WHERE email=:email AND senha=:senha";
 	$stmt = $conn->prepare($sql);
 	$stmt->bindValue(':email', $data->email, PDO::PARAM_STR);
 	$stmt->bindValue(':senha', $data->senha, PDO::PARAM_STR);
@@ -20,7 +20,9 @@ try {
 
 		echo json_encode([
 			'success' => 1,
-			'token' => $token
+			'token' => $token,
+			'id_usuario' => $user["id_usuario"],
+			'nome' => $user["nome"],
 		]);
 		exit;
 	}
