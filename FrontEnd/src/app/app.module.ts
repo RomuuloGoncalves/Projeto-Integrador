@@ -7,10 +7,11 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MaskitoDirective } from '@maskito/angular';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule,HttpClientModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule,HttpClientModule, IonicModule.forRoot(), AppRoutingModule, MaskitoDirective],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

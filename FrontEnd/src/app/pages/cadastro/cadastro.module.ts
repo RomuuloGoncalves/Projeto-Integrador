@@ -8,6 +8,7 @@ import { CadastroPageRoutingModule } from './cadastro-routing.module';
 
 import { CadastroPage } from './cadastro.page';
 import { BtnLoadingModule } from 'src/app/components/common/btn-loading/btn-loading.module';
+import { MaskitoDirective } from '@maskito/angular';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { BtnLoadingModule } from 'src/app/components/common/btn-loading/btn-load
     FormsModule,
     IonicModule,
     CadastroPageRoutingModule,
-    BtnLoadingModule
+    BtnLoadingModule,
+    MaskitoDirective
   ],
   declarations: [CadastroPage]
 })

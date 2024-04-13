@@ -1,7 +1,9 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MaskitoElementPredicate, MaskitoOptions } from '@maskito/core';
 import { CookieService } from 'ngx-cookie-service';
+import { MaskService } from 'src/app/services/mask.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -20,8 +22,11 @@ export class AtualizarPerfilComponent implements OnInit {
   @Input() public telefone!: any;
 
 
+  constructor(private Usuario: UsuarioService, private Toast: ToastService, private router: Router, private Cookie: CookieService, public Mask: MaskService) { }
 
-  constructor(private Usuario: UsuarioService, private Toast: ToastService, private router: Router, private Cookie: CookieService) { }
+  mascaraTelefone: any = this.Mask.mascaraTelefone
+  maskPredicate: any = this.Mask.maskPredicate
+
   erros: any = {};
   loading: boolean = false;
 

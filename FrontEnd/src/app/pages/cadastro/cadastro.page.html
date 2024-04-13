@@ -22,13 +22,13 @@
             </ion-row>
 
             <ion-row class="input-container">
-              <ion-input ngModel required name="telefone" errorText="Telefone inválido" label="Telefone"
+              <ion-input ngModel required name="telefone" [maskito]="mascaraTelefone" [maskitoElement]="maskPredicate" errorText="Telefone inválido" label="Telefone"
                 type="text"></ion-input>
               <!-- <ion-text class="erro" color="danger">erro</ion-text> -->
             </ion-row>
 
             <ion-row class="input-container">
-              <ion-input ngModel name="password" errorText="Deve ser maior que 8 caracteres" minlength="8" label="Senha"
+              <ion-input ngModel name="senha" errorText="Deve ser maior que 8 caracteres" minlength="8" label="Senha"
                 type="password" required></ion-input>
               <!-- <ion-text class="erro" color="danger">erro</ion-text> -->
             </ion-row>

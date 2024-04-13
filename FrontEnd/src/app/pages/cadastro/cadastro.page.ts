@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MaskService } from 'src/app/services/mask.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -12,7 +14,10 @@ export class CadastroPage implements OnInit {
 
   @ViewChild('cadastroForm') private cadastoForm!: NgForm;
 
-  constructor(private Usuario: UsuarioService, private Toast: ToastService) { }
+  constructor(private Usuario: UsuarioService, private Toast: ToastService, public Mask: MaskService, private router: Router) { }
+  mascaraTelefone: any = this.Mask.mascaraTelefone
+  maskPredicate: any = this.Mask.maskPredicate
+
   erros: any = {};
   loading: boolean = false;
 
@@ -27,9 +32,17 @@ export class CadastroPage implements OnInit {
       response => {
         console.log('Dados cadastrados com sucesso!', response);
         this.loading = false;
+        
         const tipo = 'success';
         const mensagem = 'Cadastro realizado com sucesso';
         this.Toast.mostrarToast(tipo, mensagem);
+
+        this.cadastoForm.reset();
+        this.router.navigate(['/login']);
+        setTimeout(() => {
+          location.reload();
+        }, 200);
+        this.Toast.mostrarToast('success', 'Login realizado com sucesso');
       },
       error => {
         console.error('Erro ao cadastrar os dados:', error);

@@ -24,6 +24,23 @@ try {
     $email = htmlspecialchars(trim($data->email));
     $telefone = htmlspecialchars(trim($data->telefone));
     $senha = htmlspecialchars(trim($data->senha));
+    
+    // Verificar se o e-mail já está cadastrado
+    $sqlCheckEmail = "SELECT COUNT(*) AS total FROM usuario WHERE email = :email";
+    $stmtCheckEmail = $conn->prepare($sqlCheckEmail);
+    $stmtCheckEmail->bindValue(':email', $email);
+    $stmtCheckEmail->execute();
+    $result = $stmtCheckEmail->fetch(PDO::FETCH_ASSOC);
+    
+    if ($result['total'] > 0) {
+        http_response_code(400);
+        echo json_encode([
+            'success' => 0,
+            'message' => 'E-mail já está cadastrado',
+        ]);
+        exit;
+    }
+
     $sqlInsert = "INSERT INTO usuario VALUES (0, :nome, :email, :telefone, :senha)";   
     $stmt = $conn->prepare($sqlInsert);
     $stmt->bindValue(':nome', $nome);
