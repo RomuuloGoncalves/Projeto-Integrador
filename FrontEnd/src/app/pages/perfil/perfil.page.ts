@@ -22,14 +22,12 @@ export class PerfilPage implements OnInit {
   usuario!:any
   nome_usuario?: string = this.Usuario.nome_usuario 
   id_usuario: any = (this.Usuario.id_usuario) 
-  
+  quantidade_arduinos = 0  
   private carregarPerfil() {
     this.Usuario.pegarUsuario(this.Usuario.id_usuario).subscribe(
       (response: any) => {
         this.usuario = response;
-        
         this.listagemArduino(this.id_usuario)
-   
       },
       (badResponde: HttpErrorResponse) => {
         console.log(badResponde);
@@ -39,10 +37,13 @@ export class PerfilPage implements OnInit {
   }
 
   listagemArduino(id_usuario: number) {
-    this.Arduino.listarArduinoUsuario(id_usuario).subscribe(
+    this.Arduino.listarArduinoUsuarioSensor(id_usuario).subscribe(
       response => {
+        console.log(response)
         this.arduinos = response
         this.loading = false;
+        console.log(this.arduinos)
+        this.quantidade_arduinos = this.arduinos.length
         const tipo = 'success';
         const mensagem = 'Listagem dos arduínos concluida';
         this.Toast.mostrarToast(tipo, mensagem);

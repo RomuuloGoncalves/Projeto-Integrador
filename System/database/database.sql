@@ -47,7 +47,7 @@ ADD FOREIGN KEY (id_arduino) REFERENCES arduino(id_arduino);
 
 
 INSERT INTO usuario (nome, email, telefone, senha) VALUES
-('a', 'a@a', '(11) 1234-5678', 'asdfasdf'),
+('Usuario', 'a', '(11) 1234-5678', 'asdfasdf'),
 ('Maria Oliveira', 'maria@example.com', '(22) 9876-5432', 'senha456'),
 ('Pedro Santos', 'pedro@example.com', '(33) 4567-8901', 'senha789'),
 ('Ana Costa', 'ana@example.com', '(44) 8765-4321', 'senhaabc'),
@@ -63,17 +63,22 @@ INSERT INTO usuario (nome, email, telefone, senha) VALUES
 INSERT INTO arduino (nome, localidade, quantidade_portas, id_usuario) VALUES
 ('Arduino01', 'Sala', 4, 1),
 ('Arduino02', 'Cozinha', 2, 2),
-('Arduino03', 'Quarto 1', 3, 3),
+('Arduino03', 'Quarto 1', 3, 1),
 ('Arduino04', 'Quarto 2', 5, 4),
-('Arduino05', 'Varanda', 2, 5),
+('Arduino05', 'Varanda', 2, 1),
 ('Arduino06', 'Garagem', 6, 6),
 ('Arduino07', 'Escritório', 4, 7),
 ('Arduino08', 'Área de serviço', 3, 8),
 ('Arduino09', 'Jardim', 2, 9),
-('Arduino10', 'Banheiro', 1, 10);
+('Arduino10', 'Banheiro', 1, 10),
+('Arduino011', 'Varanda', 2, 5);
 
 -- Inserindo dados na tabela sensor
 INSERT INTO sensores (nome, pino, id_arduino) VALUES
+('Sensor01', 1, 1),
+('Sensor02', 2, 1),
+('Sensor01', 1, 1),
+('Sensor02', 2, 1),
 ('Sensor01', 1, 1),
 ('Sensor02', 2, 1),
 ('Sensor03', 3, 2),

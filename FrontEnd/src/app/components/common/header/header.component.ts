@@ -17,7 +17,6 @@ export class HeaderComponent  implements OnInit {
   logedIn: Boolean = this.Usuario.logedIn;
   nome_usuario?: string = this.Usuario.nome_usuario 
 
-
   logout() {
     this.Usuario.logout().subscribe(
       (response: any) => {
