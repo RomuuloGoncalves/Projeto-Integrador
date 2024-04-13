@@ -62,7 +62,7 @@ export class LoginPage implements OnInit {
       },
 
       (badReponse: HttpErrorResponse) => {
-        this.Toast.mostrarToast('danger', 'Login realizado com sucesso');
+        this.Toast.mostrarToast('danger', 'Algo deu errado!');
 
         this.loading = false;
       }
