@@ -58,4 +58,8 @@ export class PerfilPage implements OnInit {
       }
     );
   }
+
+  excluirArduino(){
+    
+  }
 }

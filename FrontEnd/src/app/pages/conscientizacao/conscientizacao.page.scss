@@ -1,0 +1,13 @@
+.wallpaper {
+  background-image: url("../../../assets/img/conscientizacao-background.svg");
+  height: 93vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  ion-label {
+    font-size: 7rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 10px;
+  }
+}
