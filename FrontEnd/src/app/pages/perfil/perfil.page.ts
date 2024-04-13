@@ -17,6 +17,7 @@ export class PerfilPage implements OnInit {
   ngOnInit() {
     this.carregarPerfil()
   }
+
   loading = false;
   arduinos: any = []
   usuario!:any
@@ -26,6 +27,7 @@ export class PerfilPage implements OnInit {
   private carregarPerfil() {
     this.Usuario.pegarUsuario(this.Usuario.id_usuario).subscribe(
       (response: any) => {
+        console.log("user", response)
         this.usuario = response;
         this.listagemArduino(this.id_usuario)
       },
@@ -39,10 +41,9 @@ export class PerfilPage implements OnInit {
   listagemArduino(id_usuario: number) {
     this.Arduino.listarArduinoUsuarioSensor(id_usuario).subscribe(
       response => {
-        console.log(response)
+        console.log("arduinos", response)
         this.arduinos = response
         this.loading = false;
-        console.log(this.arduinos)
         this.quantidade_arduinos = this.arduinos.length
         const tipo = 'success';
         const mensagem = 'Listagem dos arduínos concluida';
@@ -59,7 +60,24 @@ export class PerfilPage implements OnInit {
     );
   }
 
-  excluirArduino(){
-    
+  public alertButtons = [
+    {
+      text: 'Canelar',
+      role: 'cancel',
+      handler: () => {
+        console.log('Alert canceled');
+      },
+    },
+    {
+      text: 'Excluir',
+      role: 'confirm',
+      handler: () => {
+        console.log('Alert confirmed');
+      },
+    },
+  ];
+
+  setResult(ev:any) {
+    console.log(`Dismissed with role: ${ev.detail.role}`);
   }
 }

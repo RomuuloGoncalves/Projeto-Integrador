@@ -22,9 +22,8 @@ $id = $data->id;
 $id = $_GET['id'];  
 
 
-$sql = "SELECT sensores.id_sensor, sensores.nome AS sensor_nome, sensores.pino, arduino.nome AS arduino_nome, arduino.localidade
-        FROM sensores
-        JOIN arduino ON sensores.id_arduino = arduino.id_arduino
+$sql = "SELECT sensores.id_sensor, sensores.nome AS sensor_nome, sensores.pino, arduino.nome AS arduino_nome, arduino.localidade, arduino.id_arduino
+        FROM sensores JOIN arduino ON sensores.id_arduino = arduino.id_arduino
         WHERE arduino.id_usuario = :id";
 
 $stmt = $conn->prepare($sql);
@@ -45,7 +44,8 @@ foreach ($result as $row) {
         $arduino_data[$arduino_name] = array(
             'nome' => $arduino_name,
             'localidade' => $row['localidade'],
-            'sensores' => array()
+            'id_arduino' => $row['id_arduino'],
+            'sensores' => array(),
         );
     }
     $arduino_data[$arduino_name]['sensores'][] = $sensor;

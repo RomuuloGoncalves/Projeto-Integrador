@@ -8,6 +8,8 @@ import { PerfilPageRoutingModule } from './perfil-routing.module';
 import { HeaderModule } from 'src/app/components/common/header/header.module';
 
 import { PerfilPage } from './perfil.page';
+import { AtualizarPerfilComponent } from 'src/app/components/perfil/modal/atualizar-perfil/atualizar-perfil.component';
+import { BtnLoadingModule } from 'src/app/components/common/btn-loading/btn-loading.module';
 
 @NgModule({
   imports: [
@@ -16,7 +18,8 @@ import { PerfilPage } from './perfil.page';
     IonicModule,
     PerfilPageRoutingModule,
     HeaderModule,
+    BtnLoadingModule
   ],
-  declarations: [PerfilPage]
+  declarations: [PerfilPage, AtualizarPerfilComponent]
 })
 export class PerfilPageModule {}

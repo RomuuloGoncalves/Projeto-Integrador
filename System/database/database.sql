@@ -27,14 +27,13 @@ CREATE TABLE sensores (
     pino INT (2) NOT NULL
 );
 
--- DROP TABLE IF EXISTS localizacao;
--- CREATE TABLE localizacao (
---     id_local INT AUTO_INCREMENT PRIMARY KEY,
---     nome VARCHAR(50) NOT NULL,
---     endereco VARCHAR(50) NOT NULL
--- );
-
--- ---------------------------------
+DROP TABLE IF EXISTS dados_sesores;
+CREATE TABLE dados_sesores (
+	id_dado INT AUTO_INCREMENT PRIMARY KEY,
+	id_sensor INT,
+	valor FLOAT NOT NULL,
+	data_coleta TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 
 ALTER TABLE arduino
@@ -45,48 +44,59 @@ ALTER TABLE sensores
 ADD COLUMN id_arduino INT NOT NULL,
 ADD FOREIGN KEY (id_arduino) REFERENCES arduino(id_arduino);
 
+ALTER TABLE dados_sensores
+ADD COLUMN id_sensor INT NOT NULL,
+ADD FOREIGN KEY (id_sensor) REFERENCES arduino(id_sensor);
 
+-- Inserções para a tabela 'usuario'
 INSERT INTO usuario (nome, email, telefone, senha) VALUES
 ('Usuario', 'a', '(11) 1234-5678', 'asdfasdf'),
-('Maria Oliveira', 'maria@example.com', '(22) 9876-5432', 'senha456'),
-('Pedro Santos', 'pedro@example.com', '(33) 4567-8901', 'senha789'),
-('Ana Costa', 'ana@example.com', '(44) 8765-4321', 'senhaabc'),
-('Carlos Pereira', 'carlos@example.com', '(55) 2345-6789', 'senhadef'),
-('Juliana Almeida', 'juliana@example.com', '(66) 7654-3210', 'senhaghi'),
-('Luiz Fernandes', 'luiz@example.com', '(77) 5432-1098', 'senhajkl'),
-('Mariana Rodrigues', 'mariana@example.com', '(88) 3210-9876', 'senhamno'),
-('Felipe Oliveira', 'felipe@example.com', '(99) 2109-8765', 'senhaqrs'),
-('Amanda Silva', 'amanda@example.com', '(00) 1098-7654', 'senhautv');
+('João Silva', 'joao@example.com', '123456789', 'senha123'),
+('Maria Souza', 'maria@example.com', '987654321', 'senha456'),
+('Pedro Santos', 'pedro@example.com', '111222333', 'senha789'),
+('Ana Oliveira', 'ana@example.com', '444555666', 'senhaabc'),
+('Lucas Pereira', 'lucas@example.com', '777888999', 'senhadef'),
+('Carla Mendes', 'carla@example.com', '000999888', 'senhaghi'),
+('Gabriel Lima', 'gabriel@example.com', '222333444', 'senhajkl'),
+('Fernanda Costa', 'fernanda@example.com', '555666777', 'senhamno'),
+('Rafaela Xavier', 'rafaela@example.com', '888999000', 'senhapqr'),
+('Daniel Almeida', 'daniel@example.com', '123123123', 'senhastu');
 
-
--- Inserindo dados na tabela arduino
+-- Inserções para a tabela 'arduino'
 INSERT INTO arduino (nome, localidade, quantidade_portas, id_usuario) VALUES
-('Arduino01', 'Sala', 4, 1),
-('Arduino02', 'Cozinha', 2, 2),
-('Arduino03', 'Quarto 1', 3, 1),
-('Arduino04', 'Quarto 2', 5, 4),
-('Arduino05', 'Varanda', 2, 1),
-('Arduino06', 'Garagem', 6, 6),
-('Arduino07', 'Escritório', 4, 7),
-('Arduino08', 'Área de serviço', 3, 8),
-('Arduino09', 'Jardim', 2, 9),
-('Arduino10', 'Banheiro', 1, 10),
-('Arduino011', 'Varanda', 2, 5);
+('Arduino1', 'Sala de estar', 4, 1),
+('Arduino2', 'Quarto 1', 2, 2),
+('Arduino3', 'Cozinha', 3, 3),
+('Arduino4', 'Sala de jantar', 5, 4),
+('Arduino5', 'Quarto 2', 2, 5),
+('Arduino6', 'Banheiro', 1, 6),
+('Arduino7', 'Escritório', 4, 7),
+('Arduino8', 'Garagem', 3, 8),
+('Arduino9', 'Varanda', 2, 9),
+('Arduino10', 'Área de serviço', 3, 10);
 
--- Inserindo dados na tabela sensor
+-- Inserções para a tabela 'sensores'
 INSERT INTO sensores (nome, pino, id_arduino) VALUES
-('Sensor01', 1, 1),
-('Sensor02', 2, 1),
-('Sensor01', 1, 1),
-('Sensor02', 2, 1),
-('Sensor01', 1, 1),
-('Sensor02', 2, 1),
-('Sensor03', 3, 2),
-('Sensor04', 4, 2),
-('Sensor05', 1, 3),
-('Sensor06', 2, 3),
-('Sensor07', 1, 4),
-('Sensor08', 2, 4),
-('Sensor09', 3, 5),
-('Sensor10', 1, 5);
+('Sensor1', 1, 1),
+('Sensor2', 2, 1),
+('Sensor3', 3, 2),
+('Sensor4', 1, 3),
+('Sensor5', 2, 4),
+('Sensor6', 1, 5),
+('Sensor7', 1, 6),
+('Sensor8', 2, 7),
+('Sensor9', 3, 8),
+('Sensor10', 1, 9);
 
+-- Inserções para a tabela 'dados_sensores'
+INSERT INTO dados_sensores (id_sensor, valor, data_coleta) VALUES
+(1, 25.3, '2024-04-13 08:00:00'),
+(2, 30.1, '2024-04-13 08:10:00'),
+(3, 22.5, '2024-04-13 08:20:00'),
+(4, 18.7, '2024-04-13 08:30:00'),
+(5, 26.8, '2024-04-13 08:40:00'),
+(6, 29.5, '2024-04-13 08:50:00'),
+(7, 24.9, '2024-04-13 09:00:00'),
+(8, 21.2, '2024-04-13 09:10:00'),
+(9, 27.6, '2024-04-13 09:20:00'),
+(10, 23.4, '2024-04-13 09:30:00');

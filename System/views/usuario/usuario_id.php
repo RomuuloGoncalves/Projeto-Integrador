@@ -19,12 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 $data = json_decode(file_get_contents("php://input"));
 $id = $data->id;
+$id = $_GET['id'];  
 
 
 $sql = "SELECT * FROM `usuario` WHERE `id_usuario` = :id";
 $stmt = $conn->prepare($sql);
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC); 
-$arduino = $result;
-echo json_encode($arduino);
+$result = $stmt->fetch(PDO::FETCH_ASSOC); 
+$usuario = $result;
+echo json_encode($usuario);

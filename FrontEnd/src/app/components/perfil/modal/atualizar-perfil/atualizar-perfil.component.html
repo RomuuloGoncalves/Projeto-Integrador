@@ -1,0 +1,46 @@
+<ion-modal id="example-modal" #modal trigger="open-custom-dialog">
+  <ng-template>
+    <div class="wrapper">
+      <h1>Atualize as informações:</h1>
+
+      <form #atualizarForm="ngForm" (ngSubmit)="this.cadastrar()">
+        <ion-row class="input-container">
+          <ion-input ngModel="{{nome}}" name="nome" label="Nome:" label-placement="floating" 
+            type="text" fill="outline" ></ion-input>
+          <!-- <ion-text class="erro" color="danger">erro</ion-text> -->
+        </ion-row>
+
+        <ion-row class="input-container">
+          <ion-input ngModel="{{email}}" name="email" label="E-mail:" label-placement="floating"
+          type="text" fill="outline" ></ion-input>
+          <!-- <ion-text class="erro" color="danger">erro</ion-text> -->
+        </ion-row>
+
+        <ion-row class="input-container">
+          <ion-input ngModel="{{telefone}}" name="telefone"
+            label="Telefone" label-placement="floating" fill="outline" type="text" ></ion-input>
+          <!-- <ion-text class="erro" color="danger">erro</ion-text> -->
+        </ion-row>
+
+        <ion-row class="input-container">
+          <ion-input ngModel="{{senha}}" name="senha"
+            label="Senha" label-placement="floating" fill="outline" type="text" ></ion-input>
+          <!-- <ion-text class="erro" color="danger">erro</ion-text> -->
+        </ion-row>
+
+        
+        <ion-row class="ion-justify-content-center ion-padding">
+          <ion-col size="auto">
+            <app-btn-loading btnNome="Atualizar" [loading]="this.loading"
+            [disabled]="!this.atualizarForm.valid"></app-btn-loading>
+          </ion-col>
+        </ion-row>
+        <ion-row class="input-container">
+          <ion-input ngModel="{{id_usuario}}" name="id" type="hidden" ></ion-input>
+          <!-- <ion-text class="erro" color="danger">erro</ion-text> -->
+        </ion-row>
+      </form>
+
+    </div>
+  </ng-template>
+</ion-modal>

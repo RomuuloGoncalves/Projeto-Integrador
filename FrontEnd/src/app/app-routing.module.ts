@@ -49,7 +49,7 @@ const routes: Routes = [
     path: 'cadastro-sensor',
     loadChildren: () => import('./pages/cadastro-sensor/cadastro-sensor.module').then( m => m.CadastroSensorPageModule),
     canActivate: [LogedGuard]
-  },
+  }
 ];
 
 @NgModule({

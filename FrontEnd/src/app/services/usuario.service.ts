@@ -23,12 +23,18 @@ export class UsuarioService {
     return this.Server.post('/views/usuario/cadastrar.php', dados);
   }
 
+  public atualizarDados(dados: any): Observable<any> {
+    // return this.http.post<any>(this.apiUrl, dados);
+    return this.Server.put('/views/usuario/atualizar.php', dados);
+  }
+
+
   public login(dados: any): Observable<any> {
     return this.Server.post('/login/logar.php', dados);
   }
 
   public pegarUsuario(id: any): Observable<any> {
-    return this.Server.get(`/views/usuario/usuario_id.php?${id}`);
+    return this.Server.get(`/views/usuario/usuario_id.php?id=${id}`);
   }
 
   public limparToken() {

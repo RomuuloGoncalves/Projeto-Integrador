@@ -32,4 +32,14 @@ export class ServerService {
 
     return this.http.get(`${url}${path}`, { headers });
   }
+
+  public put(path: string, data: any | null, url: string = this.apiUrl): Observable<any> {
+    const token = this.Cookie.get('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.put(`${url}${path}`, JSON.stringify(data), { headers });
+  }
 }
