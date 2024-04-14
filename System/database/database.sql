@@ -27,8 +27,8 @@ CREATE TABLE sensores (
     pino INT (2) NOT NULL
 );
 
-DROP TABLE IF EXISTS dados_sesores;
-CREATE TABLE dados_sesores (
+DROP TABLE IF EXISTS dados_sensores;
+CREATE TABLE dados_sensores (
 	id_dado INT AUTO_INCREMENT PRIMARY KEY,
 	id_sensor INT,
 	valor FLOAT NOT NULL,
@@ -43,6 +43,10 @@ ADD FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario);
 ALTER TABLE sensores
 ADD COLUMN id_arduino INT NOT NULL,
 ADD FOREIGN KEY (id_arduino) REFERENCES arduino(id_arduino);
+
+ALTER TABLE sensores
+ADD COLUMN id_usuario INT NOT NULL,
+ADD FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario);
 
 ALTER TABLE dados_sensores
 ADD COLUMN id_sensor INT NOT NULL,

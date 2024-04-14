@@ -13,7 +13,8 @@ export class CadastroArduinoPage implements OnInit {
 
   @ViewChild('cadastroForm') private cadastoForm!: NgForm;
 
-  constructor(private Arduino: ArduinoService, private Toast: ToastService) { }
+  constructor(private Arduino: ArduinoService, private Toast: ToastService, private Usuario: UsuarioService) { }
+  id_usuario = this.Usuario.id_usuario
   erros: any = {};
   loading: boolean = false;
 
@@ -22,9 +23,9 @@ export class CadastroArduinoPage implements OnInit {
 
   public cadastrar() {
     this.loading = true;
-    const usuario = this.cadastoForm.form.value;
-    console.log(usuario)
-    this.Arduino.cadastrarDados(usuario).subscribe(
+    const arduino = this.cadastoForm.form.value;
+    console.log(arduino)
+    this.Arduino.cadastrarDados(arduino).subscribe(
       response => {
         console.log('Dados cadastrados com sucesso!', response);
         this.loading = false;

@@ -21,14 +21,14 @@ $data = json_decode(file_get_contents("php://input"));
 
 try {
     $nome = htmlspecialchars(trim($data->nome));
-    $localidade = htmlspecialchars(trim($data->localidade));
-    $quantidade_portas = htmlspecialchars(trim($data->quantidadePortas));
+    $pino = htmlspecialchars(trim($data->pino));
+    $id_arduino = htmlspecialchars(trim($data->id_arduino));
     $id_usuario = htmlspecialchars(trim($data->id_usuario));
-    $sqlInsert = "INSERT INTO arduino VALUES (0, :nome, :localidade, :quantidade_portas, :id_usuario)";   
+    $sqlInsert = "INSERT INTO sensores VALUES (0, :nome, :pino, :id_arduino, :id_usuario)";   
     $stmt = $conn->prepare($sqlInsert);
     $stmt->bindValue(':nome', $nome);
-    $stmt->bindValue(':localidade', $localidade);
-    $stmt->bindValue(':quantidade_portas', $quantidade_portas);
+    $stmt->bindValue(':pino', $pino);
+    $stmt->bindValue(':id_arduino', $id_arduino);
     $stmt->bindValue(':id_usuario', $id_usuario);
  
  

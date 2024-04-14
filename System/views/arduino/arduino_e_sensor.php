@@ -18,12 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 }
 
 $data = json_decode(file_get_contents("php://input"));
-$id = $data->id;
-$id = $_GET['id'];  
-
+$id = $_GET['id'];
 
 $sql = "SELECT sensores.id_sensor, sensores.nome AS sensor_nome, sensores.pino, arduino.nome AS arduino_nome, arduino.localidade, arduino.id_arduino
-        FROM sensores JOIN arduino ON sensores.id_arduino = arduino.id_arduino
+        FROM sensores RIGHT JOIN arduino ON sensores.id_arduino = arduino.id_arduino
         WHERE arduino.id_usuario = :id";
 
 $stmt = $conn->prepare($sql);
@@ -48,9 +46,11 @@ foreach ($result as $row) {
             'sensores' => array(),
         );
     }
-    $arduino_data[$arduino_name]['sensores'][] = $sensor;
+    if (!empty($sensor['id_sensor'])) {
+        $arduino_data[$arduino_name]['sensores'][] = $sensor;
+    }
 }
 
 $arduino_array = array_values($arduino_data);
 echo json_encode($arduino_array);
-
+?>

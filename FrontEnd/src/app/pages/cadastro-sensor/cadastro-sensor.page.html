@@ -4,7 +4,7 @@
     <ion-col size="10" sizeMd="8" sizeLg="5">
       <ion-col size="12" sizeMd="4">
         <ion-row class="ion-justify-content-center ion-text-md-ion-justify-content-start">
-          <h1 class="cadastro__logo"><a class="cadastro__link">Adicionar arduíno</a></h1>
+          <h1 class="cadastro__logo"><a class="cadastro__link">Adicionar sensor</a></h1>
         </ion-row>
       </ion-col>
       <ion-row>
@@ -17,15 +17,17 @@
             </ion-row>
 
             <ion-row class="input-container">
-              <ion-input ngModel name="localidade" label="Localidade:" label-placement="floating"
-                errorText="Localidade é obrigatório" type="text" fill="outline" required></ion-input>
+              <ion-input ngModel name="pino" errorText="pino inválido"
+                label="Pino:" label-placement="floating" fill="outline" type="text" required></ion-input>
               <!-- <ion-text class="erro" color="danger">erro</ion-text> -->
             </ion-row>
 
             <ion-row class="input-container">
-              <ion-input ngModel name="quantidadePortas" errorText="Quantidade de portas inválido"
-                label="Quantidade de portas:" label-placement="floating" fill="outline" type="text" required></ion-input>
-              <!-- <ion-text class="erro" color="danger">erro</ion-text> -->
+              <ion-select ngModel name="id_arduino" aria-label="Arduino:" interface="popover" placeholder="Escolha em qual arduíno o sensor está conectado">
+                <ng-container *ngFor="let arduino of this.arduinos">
+                  <ion-select-option value="{{arduino?.id_arduino}}">{{arduino?.nome}}</ion-select-option>
+                </ng-container>
+              </ion-select>
             </ion-row>
 
             <ion-row class="ion-justify-content-center ion-padding">
@@ -33,6 +35,11 @@
                 <app-btn-loading btnNome="Cadastrar" [loading]="this.loading"
                   [disabled]="!this.cadastroForm.valid"></app-btn-loading>
               </ion-col>
+            </ion-row>
+
+            <ion-row class="input-container">
+              <ion-input ngModel="{{id_usuario}}" name="id_usuario" type="hidden"></ion-input>
+              <!-- <ion-text class="erro" color="danger">erro</ion-text> -->
             </ion-row>
           </form>
         </ion-col>
