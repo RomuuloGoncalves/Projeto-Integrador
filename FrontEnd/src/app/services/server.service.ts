@@ -16,6 +16,7 @@ export class ServerService {
     const token = this.Cookie.get('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
+      "ngrok-skip-browser-warning": "69420",
       'Authorization': `Bearer ${token}`
     });
 
