@@ -8,7 +8,9 @@ import { Observable } from 'rxjs';
 })
 
 export class ServerService {
-  private apiUrl = 'http://localhost/Projeto-Integrador/System';
+  // private apiUrl = 'http://localhost/Projeto-Integrador/System';
+  private apiUrl = 'https://9b46-187-35-18-77.ngrok-free.app/Projeto-Integrador/System/';
+  
 
   constructor(private http: HttpClient, private Cookie: CookieService) { }
 
@@ -28,6 +30,7 @@ export class ServerService {
     const token = this.Cookie.get('token');
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
+      "ngrok-skip-browser-warning": "69420",
       'Authorization': `Bearer ${token}`
     });
 
