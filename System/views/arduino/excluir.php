@@ -32,13 +32,11 @@ try {
     $fetch_stmt->execute();
 
     if ($fetch_stmt->rowCount() > 0) {
-        // Delete associated records from the 'sensores' table first
         $delete_sensores = "DELETE FROM `sensores` WHERE id_arduino=:id";
         $delete_sensores_stmt = $conn->prepare($delete_sensores);
         $delete_sensores_stmt->bindValue(':id', $id);
         $delete_sensores_stmt->execute();
 
-        // Then delete the record from the 'arduino' table
         $delete_arduino = "DELETE FROM `arduino` WHERE id_arduino=:id";
         $delete_arduino_stmt = $conn->prepare($delete_arduino);
         $delete_arduino_stmt->bindValue(':id', $id);
