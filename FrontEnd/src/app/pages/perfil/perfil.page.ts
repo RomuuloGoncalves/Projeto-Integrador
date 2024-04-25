@@ -168,6 +168,7 @@ export class PerfilPage implements OnInit {
         const tipo = 'success';
         const mensagem = 'Imagem alterada com sucesso';
         this.Toast.mostrarToast(tipo, mensagem);
+
       },
 
       (badReponse: HttpErrorResponse) => {

@@ -13,15 +13,32 @@ export class HeaderComponent  implements OnInit {
   constructor(private Usuario: UsuarioService, private Toast: ToastService) {}
 
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.carregarUsuario()
+  }
   // logedIn: Boolean = true;
   logedIn: Boolean = this.Usuario.logedIn;
   nome_usuario?: string = this.Usuario.nome_usuario 
+  usuario!:any
+  carregarUsuario(){
+    if(this.Usuario.id_usuario){
+      this.Usuario.pegarUsuario(this.Usuario.id_usuario).subscribe(
+        (response: any) => {
+          this.usuario = response;
+          this.usuario.imagem = this.Usuario.pegarImagem(this.usuario!.imagem)
 
+        },
+        (badResponde: HttpErrorResponse) => {
+          console.log(badResponde);
+        }
+      );
+    }
+  }
   logout() {
     this.Usuario.logout().subscribe(
       (response: any) => {
         console.log(response)
+        
         this.Usuario.limparToken();
         this.Toast.mostrarToast('success', "Deslogado");
 

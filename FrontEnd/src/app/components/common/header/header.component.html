@@ -58,7 +58,7 @@
         <ion-row>
           <ion-chip [routerLink]="['../perfil']"  routerDirection="back">
             <ion-avatar>
-              <img alt="Icone avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              <img alt="avatar" src="{{this.usuario?.imagem}}" />
             </ion-avatar>
             <ion-label>{{this.nome_usuario}}</ion-label>
           </ion-chip>
