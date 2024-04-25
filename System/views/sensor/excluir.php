@@ -26,24 +26,18 @@ if (!isset($id)) {
 }
 
 try {
-    $fetch_post = "SELECT * FROM `arduino` WHERE id_arduino=:id";
+    $fetch_post = "SELECT * FROM `sensores` WHERE id_sensor =:id";
     $fetch_stmt = $conn->prepare($fetch_post);
     $fetch_stmt->bindValue(':id', $id);
     $fetch_stmt->execute();
 
     if ($fetch_stmt->rowCount() > 0) {
-        // Delete associated records from the 'sensores' table first
-        $delete_sensores = "DELETE FROM `sensores` WHERE id_arduino=:id";
-        $delete_sensores_stmt = $conn->prepare($delete_sensores);
-        $delete_sensores_stmt->bindValue(':id', $id);
-        $delete_sensores_stmt->execute();
 
-        // Then delete the record from the 'arduino' table
-        $delete_arduino = "DELETE FROM `arduino` WHERE id_arduino=:id";
-        $delete_arduino_stmt = $conn->prepare($delete_arduino);
-        $delete_arduino_stmt->bindValue(':id', $id);
+        $delete_sensor = "DELETE FROM `sensores` WHERE id_sensor =:id";
+        $delete_sensor_stmt = $conn->prepare($delete_sensor);
+        $delete_sensor_stmt->bindValue(':id', $id);
 
-        if ($delete_arduino_stmt->execute()) {
+        if ($delete_sensor_stmt->execute()) {
             echo json_encode([
                 'success' => 1,
                 'message' => 'Deleted successfully'
