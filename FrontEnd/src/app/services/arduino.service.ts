@@ -18,4 +18,7 @@ export class ArduinoService {
   listarArduinoUsuarioSensor(id:number){
     return this.Server.get(`/views/arduino/arduino_e_sensor.php?id=${id}`);
   }
+  excluirArduino(id:number){
+    return this.Server.get(`/views/arduino/arduino_e_sensor.php?id=${id}`);
+  }
 }
