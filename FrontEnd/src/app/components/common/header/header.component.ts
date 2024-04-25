@@ -14,7 +14,8 @@ export class HeaderComponent  implements OnInit {
 
 
   ngOnInit() {}
-  logedIn: Boolean = this.Usuario.logedIn;
+  // logedIn: Boolean = this.Usuario.logedIn;
+  logedIn: Boolean = true;
   nome_usuario?: string = this.Usuario.nome_usuario 
 
   logout() {
