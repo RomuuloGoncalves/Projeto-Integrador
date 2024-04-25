@@ -8,7 +8,8 @@ CREATE TABLE usuario (
     nome VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
     telefone VARCHAR(50) NOT NULL,
-    senha VARCHAR(50) NOT NULL
+    senha VARCHAR(50) NOT NULL, 
+    imagem VARCHAR(250) DEFAULT 'https://ionicframework.com/docs/img/demos/avatar.svg'
 );
 
 DROP TABLE IF EXISTS arduino;

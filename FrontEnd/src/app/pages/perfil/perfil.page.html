@@ -3,16 +3,15 @@
   <ion-row class="ion-justify-content-center ion-align-items-center ion-margin-vertical">
     <ion-col size="11">
       <ion-row class="ion-justify-content-center ion-align-items-center">
-        <ion-col size="auto">
+        <ion-col size="auto" id="trigger-button">
           <ion-avatar>
-            <img alt="Avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            <img alt="Avatar" src="{{this.usuario?.imagem}}" />
           </ion-avatar>
         </ion-col>
 
         <ion-col size="auto">
           <ion-row class="ion-justify-content-center ion-align-items-center">
             <ion-col size="12">
-
               <ion-label>
                 {{this.nome_usuario}}
               </ion-label>
@@ -25,6 +24,27 @@
             </ion-col>
           </ion-row>
         </ion-col>
+
+        <ion-popover trigger="trigger-button">
+          <ng-template>
+            <ion-content class="ion-padding">
+              <ion-col>
+                <form #imagemForm="ngForm" (ngSubmit)="this.mudarImagem()">
+                  <ion-row class="input-container">
+                    <ion-input type="file" class="input__file" id="file" #inputArqs (change)="this.selecionarArqs($event)"
+                      label="Imagem" label-placement="floating" fill="outline" placeholder="Escolhe a imagem do produto"
+                      type="file"></ion-input>
+                  </ion-row>
+
+                  <ion-button type="ngSubmit" class="add__button" expand="block" size="medium" color="dark"
+                    fill="outline">
+                    Alterar foto
+                  </ion-button>
+                </form>
+              </ion-col>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
 
         <ion-col class="2">
           <ion-row class="ion-align-items-center">

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 
 export class ServerService {
   // private apiUrl = 'http://localhost/Projeto-Integrador/System';
-  private apiUrl = 'https://amused-hopelessly-tetra.ngrok-free.app/Projeto-Integrador/System/';
+  private apiUrl = 'https://amused-hopelessly-tetra.ngrok-free.app/Projeto-Integrador/System';
   
 
   constructor(private http: HttpClient, private Cookie: CookieService) { }
@@ -52,9 +52,21 @@ export class ServerService {
     const token = this.Cookie.get('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
+      "ngrok-skip-browser-warning": "69420",
       'Authorization': `Bearer ${token}`
     });
 
     return this.http.put(`${url}${path}`, JSON.stringify(data), { headers });
+  }
+
+  public upload(path: string, data: any): Observable<any> {
+    const token = this.Cookie.get('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.post(`${this.apiUrl}${path}`, data, { headers });
+  }
+
+  public imagem(imagem:any){
+    return imagem != 'https://ionicframework.com/docs/img/demos/avatar.svg' ? `${this.apiUrl}/public/uploads/imgs/${imagem}` : 'https://ionicframework.com/docs/img/demos/avatar.svg'
   }
 }

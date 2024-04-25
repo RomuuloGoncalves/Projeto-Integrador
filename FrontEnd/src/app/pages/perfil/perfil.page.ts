@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { CookieService } from 'ngx-cookie-service';
 import { ArduinoService } from 'src/app/services/arduino.service';
@@ -13,6 +14,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
+  @ViewChild('imagemForm') private imagemForm!: NgForm;
 
   constructor(private Arduino: ArduinoService, private Sensor: SensorService, private Toast: ToastService, private Usuario: UsuarioService, private Cookie: CookieService, private alertController: AlertController) { }
 
@@ -31,6 +33,7 @@ export class PerfilPage implements OnInit {
       (response: any) => {
         console.log("user", response)
         this.usuario = response;
+        this.usuario.imagem = this.Usuario.pegarImagem(this.usuario!.imagem)
         this.listagemArduino(this.id_usuario)
       },
       (badResponde: HttpErrorResponse) => {
@@ -80,18 +83,19 @@ export class PerfilPage implements OnInit {
             this.excluirArduino(id)
           }
         }
-      ],    });
-  
+      ],
+    });
+
     await alert.present();
   }
 
-  excluirArduino(id:number){
+  excluirArduino(id: number) {
     this.Arduino.excluirArduino(id).subscribe(
       response => {
         const tipo = 'success';
         const mensagem = 'Arduíno excluído com sucesso';
         location.reload();
-        
+
         this.Toast.mostrarToast(tipo, mensagem);
       },
       error => {
@@ -121,18 +125,19 @@ export class PerfilPage implements OnInit {
             this.excluirSensor(id)
           }
         }
-      ],    });
-      
-      await alert.present();
-    }
-    
-    excluirSensor(id:number){
-      this.Sensor.excluirSensor(id).subscribe(
-        response => {
-          const tipo = 'success';
+      ],
+    });
+
+    await alert.present();
+  }
+
+  excluirSensor(id: number) {
+    this.Sensor.excluirSensor(id).subscribe(
+      response => {
+        const tipo = 'success';
         const mensagem = 'Sensor excluído com sucesso';
         location.reload();
-        
+
         this.Toast.mostrarToast(tipo, mensagem);
       },
       error => {
@@ -143,5 +148,34 @@ export class PerfilPage implements OnInit {
       }
     );
   }
-  
+
+  arqsSelecionados: File[] = [];
+  nomeArqSelecionado?: string
+  selecionarArqs(event: any) {
+    this.arqsSelecionados = event.target.files;
+
+  }
+
+  mudarImagem() {
+    const imagem = this.imagemForm.form.value;
+    imagem.imagem = this.arqsSelecionados[0]
+    imagem.id = this.id_usuario
+    console.log(imagem)
+    this.Usuario.alterarImagem(imagem).subscribe(
+      (response: any) => {
+        console.log(response)
+        location.reload()
+        const tipo = 'success';
+        const mensagem = 'Imagem alterada com sucesso';
+        this.Toast.mostrarToast(tipo, mensagem);
+      },
+
+      (badReponse: HttpErrorResponse) => {
+        console.log(badReponse)
+        const tipo = 'danger';
+        const mensagem = 'Erro ao trocar imagem!';
+        this.Toast.mostrarToast(tipo, mensagem);
+      }
+    )
+  }
 }
