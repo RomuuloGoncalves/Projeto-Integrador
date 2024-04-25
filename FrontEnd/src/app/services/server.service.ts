@@ -67,6 +67,6 @@ export class ServerService {
   }
 
   public imagem(imagem:any){
-    return imagem != 'https://ionicframework.com/docs/img/demos/avatar.svg' ? `${this.apiUrl}/public/uploads/imgs/${imagem}` : 'https://ionicframework.com/docs/img/demos/avatar.svg'
+    return (imagem != 'https://ionicframework.com/docs/img/demos/avatar.svg' || imagem.trim() == '' || imagem.trim() == null) ? `${this.apiUrl}/public/uploads/imgs/${imagem}` : 'https://ionicframework.com/docs/img/demos/avatar.svg'
   }
 }
