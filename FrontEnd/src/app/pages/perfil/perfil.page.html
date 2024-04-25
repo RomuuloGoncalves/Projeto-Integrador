@@ -32,7 +32,9 @@
               <ion-icon size="large" name="create-outline"></ion-icon>
             </ion-button>
 
-            <app-atualizar-perfil [nome]="this.usuario?.nome" [id_usuario]="this.usuario?.id_usuario" [telefone]="this.usuario?.telefone" [email]="this.usuario?.email" [senha]="this.usuario?.senha"></app-atualizar-perfil>
+            <app-atualizar-perfil [nome]="this.usuario?.nome" [id_usuario]="this.usuario?.id_usuario"
+              [telefone]="this.usuario?.telefone" [email]="this.usuario?.email"
+              [senha]="this.usuario?.senha"></app-atualizar-perfil>
           </ion-row>
         </ion-col>
       </ion-row>
@@ -47,9 +49,7 @@
           <ion-button [routerLink]="['../cadastro-arduino']" routerDirection="back" class="add__button" expand="block"
             size="large" color="quartinary" fill="outline">
             <ion-row class="ion-justify-content-center ion-align-items-center">
-              <!-- <ion-icon size="large" class="ion-margin-horizontal" name="add-circle-outline"></ion-icon> -->
               Novo Arduíno
-              <!-- <ion-icon size="large" class="ion-margin-horizontal" name="add-circle-outline"></ion-icon> -->
             </ion-row>
           </ion-button>
         </ion-col>
@@ -58,9 +58,7 @@
           <ion-button [routerLink]="['../cadastro-sensor']" routerDirection="back" class="add__button" expand="block"
             size="large" color="quartinary" fill="outline">
             <ion-row class="ion-justify-content-center ion-align-items-center">
-              <!-- <ion-icon size="large" class="ion-margin-horizontal" name="add-circle-outline"></ion-icon> -->
               Novo Sensor
-              <!-- <ion-icon size="large" class="ion-margin-horizontal" name="add-circle-outline"></ion-icon> -->
             </ion-row>
           </ion-button>
 
@@ -69,92 +67,85 @@
     </ion-col>
 
     <ion-col size="11" class="lista ion-padding">
-
-      <!-- <ion-row class="lista__dispositivo ion-justify-content-between ion-align-items-center">
-          <ion-col size="auto">
-            <ion-label>
-              {{arduino.nome}}
-            </ion-label>
-          </ion-col>
-
-          <ion-col size="auto">
-            <ion-row>
-              <ion-col size="auto">
-                <ion-button expand="block" color="success">
-                  <ion-icon size="large" name="create-outline"></ion-icon>
-                </ion-button>
-              </ion-col>
-
-              <ion-col size="auto">
-                <ion-button expand="block" color="danger">
-                  <ion-icon size="large" name="trash-outline"></ion-icon>
-                </ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-col>
-        </ion-row> -->
       <ion-accordion-group [multiple]="true" [value]="['first']">
-        <ng-container *ngFor="let arduino of arduinos; let i = index">
 
-          <ion-accordion value="arduino-{{i}}">
-            <ion-item slot="header" color="light">
-              <ion-label>
-                <ion-row class="lista__dispositivo ion-justify-content-between ion-align-items-center">
-                  <ion-col size="auto">
-                    <ion-label>
-                      {{arduino!.nome}}
-                    </ion-label>
-                  </ion-col>
-                  
-                  <ion-col size="auto">
-                    <ion-row>
+        <ng-container *ngIf="arduinos.length > 0; else elseBlock">
+          <ng-container *ngFor="let arduino of arduinos; let i = index">
+
+            <ion-accordion value="arduino-{{i}}">
+              <ion-item slot="header" color="light">
+                <ion-label>
+                  <ion-row class="lista__dispositivo ion-justify-content-between ion-align-items-center">
+                    <ion-col size="auto">
+                      <ion-label>
+                        {{arduino!.nome}}
+                      </ion-label>
+                    </ion-col>
+
+                    <ion-col size="auto">
+                      <ion-row>
+                        <ion-col size="auto">
+                          <ion-button expand="block" size="large" fill="oultine" color="dark">
+                            <ion-icon size="large" name="create-outline"></ion-icon>
+                          </ion-button>
+                        </ion-col>
+
+                        <ion-col size="auto">
+                          <ion-button (click)="mostrarAlertaExcluirArduino(arduino!.id_arduino)" expand="block"
+                            size="large" color="dark" id="excluir-{{arduino!.id_arduino}}">
+                            <ion-icon size="large" size="large" name="trash-outline"></ion-icon>
+                          </ion-button>
+                        </ion-col>
+                      </ion-row>
+                    </ion-col>
+                  </ion-row>
+                </ion-label>
+              </ion-item>
+              <div class="ion-padding" slot="content">
+                <ng-container *ngIf="arduino.sensores.length > 0; else elseBlockSensor">
+                  <ng-container *ngFor="let sensor of arduino.sensores">
+                    <ion-row class="lista__dispositivo ion-justify-content-between ion-align-items-center">
                       <ion-col size="auto">
-                        <ion-button expand="block" size="large" fill="oultine" color="dark">
-                          <ion-icon size="large" name="create-outline"></ion-icon>
-                        </ion-button>
+                        <ion-label>
+                          {{sensor!.nome}}
+                        </ion-label>
                       </ion-col>
-                      
+
                       <ion-col size="auto">
-                        <ion-button expand="block" size="large" color="dark" id="excluir-{{arduino!.id_arduino}}" >
-                          <ion-icon size="large" size="large" name="trash-outline" ></ion-icon>
-                        </ion-button>
-                        <!-- <ion-alert trigger="excluir-{{arduino!.id_arduino}}"  header="Excluir o arduíno: {{arduino!.nome}}?" [buttons]="alertButtons"
-                          (didDismiss)="setResult($event)"></ion-alert> -->
+                        <ion-row>
+                          <ion-col size="auto">
+                            <ion-button expand="block" color="success">
+                              <ion-icon size="large" name="create-outline"></ion-icon>
+                            </ion-button>
+                          </ion-col>
+
+                          <ion-col size="auto">
+                            <ion-button (click)="mostrarAlertaExcluirSensor(sensor!.id_sensor)" expand="block"
+                              color="danger">
+                              <ion-icon size="large" name="trash-outline"></ion-icon>
+                            </ion-button>
+                          </ion-col>
+                        </ion-row>
                       </ion-col>
                     </ion-row>
-                  </ion-col>
-                </ion-row>
-              </ion-label>
-            </ion-item>
-            <div class="ion-padding" slot="content">
-              <ng-container *ngFor="let sensor of arduino.sensores">
-                <ion-row class="lista__dispositivo ion-justify-content-between ion-align-items-center">
-                  <ion-col size="auto">
-                    <ion-label>
-                      {{sensor!.nome}}
-                    </ion-label>
-                  </ion-col>
+                  </ng-container>
+                </ng-container>
 
-                  <ion-col size="auto">
-                    <ion-row>
-                      <ion-col size="auto">
-                        <ion-button expand="block" color="success">
-                          <ion-icon size="large" name="create-outline"></ion-icon>
-                        </ion-button>
-                      </ion-col>
-
-                      <ion-col size="auto">
-                        <ion-button expand="block" color="danger">
-                          <ion-icon size="large" name="trash-outline"></ion-icon>
-                        </ion-button>
-                      </ion-col>
-                    </ion-row>
-                  </ion-col>
-                </ion-row>
-              </ng-container>
-            </div>
-          </ion-accordion>
+                <ng-template #elseBlockSensor>
+                  <ion-row class="ion-justify-content-center">
+                    Não há sensores vinculados com este arduíno
+                  </ion-row>
+                </ng-template>
+              </div>
+            </ion-accordion>
+          </ng-container>
         </ng-container>
+
+        <ng-template #elseBlock>
+          <ion-row class="ion-justify-content-center">
+            Não há arduinos cadastrados no seu perfil
+          </ion-row>
+        </ng-template>
       </ion-accordion-group>
     </ion-col>
   </ion-row>

@@ -37,6 +37,17 @@ export class ServerService {
     return this.http.get(`${url}${path}`, { headers });
   }
 
+  public delete(path: string, url: string = this.apiUrl): Observable<any> {
+    const token = this.Cookie.get('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      "ngrok-skip-browser-warning": "69420",
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.delete(`${url}${path}`, { headers });
+  }
+
   public put(path: string, data: any | null, url: string = this.apiUrl): Observable<any> {
     const token = this.Cookie.get('token');
     const headers = new HttpHeaders({

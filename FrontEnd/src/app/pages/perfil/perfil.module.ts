@@ -11,6 +11,8 @@ import { PerfilPage } from './perfil.page';
 import { AtualizarPerfilComponent } from 'src/app/components/perfil/modal/atualizar-perfil/atualizar-perfil.component';
 import { BtnLoadingModule } from 'src/app/components/common/btn-loading/btn-loading.module';
 import { MaskitoDirective } from '@maskito/angular'
+import { ExcluirArduinoComponent } from 'src/app/components/perfil/alert/excluir-arduino/excluir-arduino.component';
+import { ExcluirSensorComponent } from 'src/app/components/perfil/alert/excluir-sensor/excluir-sensor.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -21,6 +23,6 @@ import { MaskitoDirective } from '@maskito/angular'
     BtnLoadingModule, 
     MaskitoDirective
   ],
-  declarations: [PerfilPage, AtualizarPerfilComponent]
+  declarations: [PerfilPage, AtualizarPerfilComponent, ExcluirArduinoComponent, ExcluirSensorComponent]
 })
 export class PerfilPageModule {}

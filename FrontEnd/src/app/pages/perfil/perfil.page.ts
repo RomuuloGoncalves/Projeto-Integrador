@@ -1,7 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { CookieService } from 'ngx-cookie-service';
 import { ArduinoService } from 'src/app/services/arduino.service';
+import { SensorService } from 'src/app/services/sensor.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -12,7 +14,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class PerfilPage implements OnInit {
 
-  constructor(private Arduino: ArduinoService, private Toast: ToastService, private Usuario: UsuarioService, private Cookie: CookieService) { }
+  constructor(private Arduino: ArduinoService, private Sensor: SensorService, private Toast: ToastService, private Usuario: UsuarioService, private Cookie: CookieService, private alertController: AlertController) { }
 
   ngOnInit() {
     this.carregarPerfil()
@@ -20,10 +22,10 @@ export class PerfilPage implements OnInit {
 
   loading = false;
   arduinos: any = []
-  usuario!:any
-  nome_usuario?: string = this.Usuario.nome_usuario 
-  id_usuario: any = (this.Usuario.id_usuario) 
-  quantidade_arduinos = 0  
+  usuario!: any
+  nome_usuario?: string = this.Usuario.nome_usuario
+  id_usuario: any = (this.Usuario.id_usuario)
+  quantidade_arduinos = 0
   private carregarPerfil() {
     this.Usuario.pegarUsuario(this.Usuario.id_usuario).subscribe(
       (response: any) => {
@@ -60,24 +62,86 @@ export class PerfilPage implements OnInit {
     );
   }
 
-  public alertButtons = [
-    {
-      text: 'Canelar',
-      role: 'cancel',
-      handler: () => {
-        console.log('Alert canceled');
-      },
-    },
-    {
-      text: 'Excluir',
-      role: 'confirm',
-      handler: () => {
-        console.log('Alert confirmed');
-      },
-    },
-  ];
-
-  setResult(ev:any) {
-    console.log(`Dismissed with role: ${ev.detail.role}`);
+  async mostrarAlertaExcluirArduino(id: number) {
+    const alert = await this.alertController.create({
+      header: 'Alerta!',
+      message: 'Deseja excluir o arduíno?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel',
+          handler: () => {
+            console.log('Ação cancelada');
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.excluirArduino(id)
+          }
+        }
+      ],    });
+  
+    await alert.present();
   }
+
+  excluirArduino(id:number){
+    this.Arduino.excluirArduino(id).subscribe(
+      response => {
+        const tipo = 'success';
+        const mensagem = 'Arduíno excluído com sucesso';
+        location.reload();
+        
+        this.Toast.mostrarToast(tipo, mensagem);
+      },
+      error => {
+        console.error('Erro ao excluir os dados:', error);
+        const tipo = 'danger';
+        const mensagem = 'Erro ao excluir arduíno!';
+        this.Toast.mostrarToast(tipo, mensagem);
+      }
+    );
+  }
+
+  async mostrarAlertaExcluirSensor(id: number) {
+    const alert = await this.alertController.create({
+      header: 'Alerta!',
+      message: 'Deseja excluir o sensor?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel',
+          handler: () => {
+            console.log('Ação cancelada');
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.excluirSensor(id)
+          }
+        }
+      ],    });
+      
+      await alert.present();
+    }
+    
+    excluirSensor(id:number){
+      this.Sensor.excluirSensor(id).subscribe(
+        response => {
+          const tipo = 'success';
+        const mensagem = 'Sensor excluído com sucesso';
+        location.reload();
+        
+        this.Toast.mostrarToast(tipo, mensagem);
+      },
+      error => {
+        console.error('Erro ao excluir os dados:', error);
+        const tipo = 'danger';
+        const mensagem = 'Erro ao excluir o sensor!';
+        this.Toast.mostrarToast(tipo, mensagem);
+      }
+    );
+  }
+  
 }
