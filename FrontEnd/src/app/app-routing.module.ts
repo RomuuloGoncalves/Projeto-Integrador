@@ -49,6 +49,18 @@ const routes: Routes = [
     path: 'cadastro-sensor',
     loadChildren: () => import('./pages/cadastro-sensor/cadastro-sensor.module').then( m => m.CadastroSensorPageModule),
     canActivate: [LogedGuard]
+  },
+  {
+    path: 'privacidade',
+    loadChildren: () => import('./pages/privacidade/privacidade.module').then( m => m.PrivacidadePageModule)
+  },
+  {
+    path: 'cookies',
+    loadChildren: () => import('./pages/cookies/cookies.module').then( m => m.CookiesPageModule)
+  },
+  {
+    path: 'termos',
+    loadChildren: () => import('./pages/termos/termos.module').then( m => m.TermosPageModule)
   }
 ];
 

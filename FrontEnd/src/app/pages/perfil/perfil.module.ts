@@ -11,6 +11,7 @@ import { PerfilPage } from './perfil.page';
 import { AtualizarPerfilComponent } from 'src/app/components/perfil/modal/atualizar-perfil/atualizar-perfil.component';
 import { BtnLoadingModule } from 'src/app/components/common/btn-loading/btn-loading.module';
 import { MaskitoDirective } from '@maskito/angular'
+import { FooterModule } from 'src/app/components/common/footer/footer.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { MaskitoDirective } from '@maskito/angular'
     PerfilPageRoutingModule,
     HeaderModule,
     BtnLoadingModule, 
-    MaskitoDirective
+    MaskitoDirective,
+    FooterModule
   ],
   declarations: [PerfilPage, AtualizarPerfilComponent]
 })

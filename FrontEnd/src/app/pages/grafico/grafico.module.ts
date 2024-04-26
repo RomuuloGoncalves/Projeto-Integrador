@@ -9,6 +9,7 @@ import { GraficoPageRoutingModule } from './grafico-routing.module';
 import { GraficoPage } from './grafico.page';
 import { HeaderModule } from 'src/app/components/common/header/header.module';
 import { GraficoArComponent } from 'src/app/components/grafico/grafico-ar/grafico-ar.component';
+import { FooterModule } from 'src/app/components/common/footer/footer.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { GraficoArComponent } from 'src/app/components/grafico/grafico-ar/grafic
     FormsModule,
     IonicModule,
     GraficoPageRoutingModule,
-    HeaderModule
+    HeaderModule,
+    FooterModule
   ],
   declarations: [GraficoPage, GraficoArComponent]
 })

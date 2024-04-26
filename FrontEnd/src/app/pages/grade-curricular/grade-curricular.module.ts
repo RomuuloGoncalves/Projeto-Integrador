@@ -8,6 +8,7 @@ import { GradeCurricularPageRoutingModule } from './grade-curricular-routing.mod
 
 import { GradeCurricularPage } from './grade-curricular.page';
 import { HeaderModule } from 'src/app/components/common/header/header.module';
+import { FooterModule } from 'src/app/components/common/footer/footer.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { HeaderModule } from 'src/app/components/common/header/header.module';
     FormsModule,
     IonicModule,
     GradeCurricularPageRoutingModule,
-    HeaderModule
+    HeaderModule,
+    FooterModule
   ],
   declarations: [GradeCurricularPage]
 })

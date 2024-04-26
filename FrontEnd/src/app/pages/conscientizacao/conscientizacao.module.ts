@@ -8,6 +8,7 @@ import { ConscientizacaoPageRoutingModule } from './conscientizacao-routing.modu
 
 import { ConscientizacaoPage } from './conscientizacao.page';
 import { HeaderModule } from 'src/app/components/common/header/header.module';
+import { FooterModule } from 'src/app/components/common/footer/footer.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { HeaderModule } from 'src/app/components/common/header/header.module';
     FormsModule,
     IonicModule,
     ConscientizacaoPageRoutingModule,
-    HeaderModule
+    HeaderModule,
+    FooterModule
   ],
   declarations: [ConscientizacaoPage]
 })
