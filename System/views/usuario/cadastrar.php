@@ -41,7 +41,17 @@ try {
         exit;
     }
 
-    $sqlInsert = "INSERT INTO usuario VALUES (0, :nome, :email, :telefone, :senha)";   
+    // Verificar se o formato do e-mail é válido
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        http_response_code(400);
+        echo json_encode([
+            'success' => 0,
+            'message' => 'Formato de e-mail inválido',
+        ]);
+        exit;
+    }
+
+    $sqlInsert = "INSERT INTO usuario (nome, email, telefone, senha) VALUES (:nome, :email, :telefone, :senha)";
     $stmt = $conn->prepare($sqlInsert);
     $stmt->bindValue(':nome', $nome);
     $stmt->bindValue(':email', $email);
@@ -71,3 +81,4 @@ try {
     ]);
     exit;
 }
+?>

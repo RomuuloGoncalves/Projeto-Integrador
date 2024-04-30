@@ -61,10 +61,13 @@ export class LoginPage implements OnInit {
         this.loading = false;
       },
 
-      (badReponse: HttpErrorResponse) => {
-        this.Toast.mostrarToast('danger', 'Algo deu errado!');
-
+      error => {
+        console.error('Erro ao cadastrar os dados:', error);
         this.loading = false;
+
+        const tipo = 'danger';
+        const mensagem = error.error.message;
+        this.Toast.mostrarToast(tipo, mensagem);
       }
     )
   }

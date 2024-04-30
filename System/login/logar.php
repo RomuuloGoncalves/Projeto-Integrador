@@ -6,6 +6,15 @@ include './criarJwt.php';
 $data = json_decode(file_get_contents("php://input"));
 
 try {
+	if (!filter_var($data->email, FILTER_VALIDATE_EMAIL)) {
+		http_response_code(400);
+		echo json_encode([
+			'success' => 0,
+			'message' => 'Formato de e-mail inválido',
+		]);
+		exit;
+	}
+
 	$sql = "SELECT `id_usuario`, `nome` FROM `usuario` WHERE email=:email AND senha=:senha";
 	$stmt = $conn->prepare($sql);
 	$stmt->bindValue(':email', $data->email, PDO::PARAM_STR);
@@ -25,13 +34,15 @@ try {
 			'nome' => $user["nome"],
 		]);
 		exit;
+	} else {
+		// Usuário não encontrado
+		http_response_code(404);
+		echo json_encode([
+			'success' => 0,
+			'message' => 'Usuário não encontrado'
+		]);
+		exit;
 	}
-
-	echo json_encode([
-		'success' => 0,
-		'message' => 'Falha ao realizar o login'
-	]);
-	exit;
 } catch (PDOException $e) {
 	http_response_code(500);
 	echo json_encode([

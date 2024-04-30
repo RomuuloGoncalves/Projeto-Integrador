@@ -49,7 +49,7 @@ export class CadastroPage implements OnInit {
         this.loading = false;
 
         const tipo = 'danger';
-        const mensagem = 'Algo deu errado!';
+        const mensagem = error.error.message;
         this.Toast.mostrarToast(tipo, mensagem);
       }
     );

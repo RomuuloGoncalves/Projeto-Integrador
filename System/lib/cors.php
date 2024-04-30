@@ -8,3 +8,12 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 // Define os cabeçalhos permitidos para serem incluídos na solicitação
 header("Access-Control-Allow-Headers: Content-Type, Authorization, ngrok-skip-browser-warning");
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization, ngrok-skip-browser-warning");
+    header("HTTP/1.1 200 OK");
+    exit;
+}
