@@ -58,33 +58,34 @@ ADD COLUMN id_sensor INT NOT NULL,
 ADD FOREIGN KEY (id_sensor) REFERENCES sensores(id_sensor);
 
 -- Inserções na tabela 'usuario'
-INSERT INTO usuario (nome, email, telefone, senha)
-VALUES ('João Silva', 'joao@example.com', '123456789', 'senha123'),
-       ('Maria Santos', 'maria@example.com', '987654321', 'senha456'),
-       ('Pedro Oliveira', 'pedro@example.com', '456789123', 'senha789'),
-       ('Ana Lima', 'ana@example.com', '321654987', 'senhaabc'),
-       ('Carlos Souza', 'carlos@example.com', '654987321', 'senhaxyz');
+INSERT INTO usuario (nome, email, telefone, senha) VALUES 
+('a', 'a', '1111111111', 'asdfasdf'),
+('João Silva', 'joao@example.com', '123456789', 'senha123'),
+('Maria Santos', 'maria@example.com', '987654321', 'senha456'),
+('Pedro Oliveira', 'pedro@example.com', '456789123', 'senha789'),
+('Ana Lima', 'ana@example.com', '321654987', 'senhaabc'),
+('Carlos Souza', 'carlos@example.com', '654987321', 'senhaxyz');
 
 -- Inserções na tabela 'arduino'
-INSERT INTO arduino (nome, localidade, quantidade_portas, id_usuario)
-VALUES ('Arduino1', 'Sala', 10, 1),
-       ('Arduino2', 'Cozinha', 8, 2),
-       ('Arduino3', 'Quarto', 6, 3),
-       ('Arduino4', 'Banheiro', 4, 4),
-       ('Arduino5', 'Garagem', 12, 5);
+INSERT INTO arduino (nome, localidade, quantidade_portas, id_usuario) VALUES 
+('Arduino1', 'Sala', 10, 1),
+('Arduino2', 'Cozinha', 8, 2),
+('Arduino3', 'Quarto', 6, 3),
+('Arduino4', 'Banheiro', 4, 4),
+('Arduino5', 'Garagem', 12, 5);
 
 -- Inserções na tabela 'sensores'
-INSERT INTO sensores (nome, pino, id_arduino, id_usuario)
-VALUES ('Sensor1', 1, 1, 1),
-       ('Sensor2', 2, 1, 1),
-       ('Sensor3', 3, 2, 2),
-       ('Sensor4', 4, 2, 2),
-       ('Sensor5', 5, 3, 3);
+INSERT INTO sensores (nome, pino, id_arduino, id_usuario) VALUES 
+('Sensor1', 1, 1, 1),
+('Sensor2', 2, 1, 1),
+('Sensor3', 3, 2, 2),
+('Sensor4', 4, 2, 2),
+('Sensor5', 5, 3, 3);
 
 -- Inserções na tabela 'dados_sensores'
-INSERT INTO dados_sensores (valor, id_sensor)
-VALUES (25.5, 1),
-       (30.2, 2),
-       (15.7, 3),
-       (18.9, 4),
-       (22.1, 5);
+INSERT INTO dados_sensores (valor, id_sensor) VALUES
+(25.5, 1),
+(30.2, 2),
+(15.7, 3),
+(18.9, 4),
+(22.1, 5);
