@@ -83,9 +83,11 @@ INSERT INTO sensores (nome, pino, id_arduino, id_usuario) VALUES
 ('Sensor5', 5, 3, 3);
 
 -- Inserções na tabela 'dados_sensores'
-INSERT INTO dados_sensores (valor, id_sensor) VALUES
-(25.5, 1),
-(30.2, 2),
-(15.7, 3),
-(18.9, 4),
-(22.1, 5);
+INSERT INTO dados_sensores (valor, id_sensor, data_coleta) VALUES
+(25, 1, DATE_SUB(CURDATE(), INTERVAL 6 DAY)),
+(30, 2, DATE_SUB(CURDATE(), INTERVAL 5 DAY)),
+(15, 3, DATE_SUB(CURDATE(), INTERVAL 4 DAY)),
+(18, 4, DATE_SUB(CURDATE(), INTERVAL 3 DAY)),
+(22, 5, DATE_SUB(CURDATE(), INTERVAL 2 DAY)),
+(20, 1, DATE_SUB(CURDATE(), INTERVAL 1 DAY)),
+(28, 2, CURDATE());
