@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 })
 
 export class ServerService {
-  private apiUrl = 'http://localhost/Projeto-Integrador/System';
-  // private apiUrl = 'https://amused-hopelessly-tetra.ngrok-free.app/Projeto-Integrador/System';
+  // private apiUrl = 'http://localhost/Projeto-Integrador/System';
+  private apiUrl = 'https://amused-hopelessly-tetra.ngrok-free.app/Projeto-Integrador/System';
   
 
   constructor(private http: HttpClient, private Cookie: CookieService) { }
@@ -23,7 +23,6 @@ export class ServerService {
     });
 
     return this.http.post(`${url}${path}`, JSON.stringify(data), { headers });
-    return this.http.post(`${url}${path}`, JSON.stringify(data));
   }
 
   public get(path: string, url: string = this.apiUrl): Observable<any> {
