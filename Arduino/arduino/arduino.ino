@@ -3,8 +3,8 @@
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 
-char ssid[] = "Wokwi-GUEST";
-char password[] = "";
+const char* ssid = "Wokwi-GUEST";
+const char* password = "";
 
 const char* serverAddress = "https://amused-hopelessly-tetra.ngrok-free.app/Projeto-Integrador/System"; 
 
