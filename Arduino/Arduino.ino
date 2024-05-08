@@ -3,14 +3,16 @@
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 
-const char* ssid = "Wokwi-GUEST";
-const char* password = "";
+
+const char* ssid = "Ro";
+const char* password = "amaterasu";
 
 const char* serverAddress = "https://amused-hopelessly-tetra.ngrok-free.app/Projeto-Integrador/System"; 
 
 void setup() {
   Serial.begin(115200);
   Serial.println("Hello, ESP32!");
+
 
   WiFi.begin(ssid, password);
 
@@ -23,6 +25,7 @@ void setup() {
 void loop() {
   if (WiFi.status() == WL_CONNECTED) {
     HTTPClient http;
+    WiFiClient client;
     
     StaticJsonDocument<200> doc;
     doc["id_sensor"] = 1;
@@ -32,8 +35,10 @@ void loop() {
     serializeJson(doc, jsonString);
     Serial.println(jsonString);
 
-    http.begin(String(serverAddress) + "/views/dados/cadastro.php");
-    http.addHeader("Content-Type", "application/json", "ngrok-skip-browser-warning");
+//    http.begin(String(serverAddress) + "/views/dados/cadastro.php");
+    http.begin("https://httpbin.org/anything");
+    http.addHeader("Content-Type", "application/json");
+//    http.addHeader("ngrok-skip-browser-warning", "69420");
 
     int httpResponseCode = http.POST(jsonString);
     if (httpResponseCode > 0) {
