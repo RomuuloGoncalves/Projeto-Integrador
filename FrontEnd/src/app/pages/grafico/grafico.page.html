@@ -1,6 +1,16 @@
 <ion-content [fullscreen]="true">
   <app-header></app-header>
 
+  <ion-row class="ion-align-items-center ion-justify-content-center">
+    <ion-col size="12" sizeMd="8">
+      <ion-select aria-label="Filtro" interface="popover" placeholder="Selecione o periodo">
+        <ion-select-option value="semana">Semana</ion-select-option>
+        <ion-select-option value="mes">Mês</ion-select-option>
+        <ion-select-option value="ano">Ano</ion-select-option>
+      </ion-select>
+    </ion-col>
+  </ion-row>
+
   <ion-row class="ion-justify-content-center ion-align-items-center">
     <ion-col size="12" sizeMd="8">
       <app-grafico-ar></app-grafico-ar>
