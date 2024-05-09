@@ -47,8 +47,14 @@ try {
                 $allowed_exs = array("jpg", "jpeg", "png");
 
                 if (in_array($img_ex_lc, $allowed_exs)) {
+                    // Verificar se o diretório de destino existe, senão, criar
+                    $upload_dir = '../../public/uploads/imgs/';
+                    if (!file_exists($upload_dir)) {
+                        mkdir($upload_dir, 0777, true);
+                    }
+
                     $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                    $img_upload_path = '../../public/uploads/imgs/' . $new_img_name;
+                    $img_upload_path = $upload_dir . $new_img_name;
                     move_uploaded_file($tmp_name, $img_upload_path);
 
                     // Atualizando o caminho da imagem no banco de dados
