@@ -16,12 +16,12 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
-    // canActivate: [RedirectGuard]
+    canActivate: [RedirectGuard]
   },
   {
     path: 'cadastro',
     loadChildren: () => import('./pages/cadastro/cadastro.module').then( m => m.CadastroPageModule),
-    // canActivate: [RedirectGuard]
+    canActivate: [RedirectGuard]
   },
   {
     path: 'grade-curricular',
@@ -38,17 +38,17 @@ const routes: Routes = [
   {
     path: 'perfil',
     loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule),
-    // canActivate: [LogedGuard]
+    canActivate: [LogedGuard]
   },
   {
     path: 'cadastro-arduino',
     loadChildren: () => import('./pages/cadastro-arduino/cadastro-arduino.module').then( m => m.CadastroArduinoPageModule),
-    // canActivate: [LogedGuard]
+    canActivate: [LogedGuard]
   },
   {
     path: 'cadastro-sensor',
     loadChildren: () => import('./pages/cadastro-sensor/cadastro-sensor.module').then( m => m.CadastroSensorPageModule),
-    // canActivate: [LogedGuard]
+    canActivate: [LogedGuard]
   },
   {
     path: 'privacidade',

@@ -16,8 +16,8 @@ export class HeaderComponent  implements OnInit {
   ngOnInit() {
     this.carregarUsuario()
   }
-  logedIn: Boolean = true;
-  // logedIn: Boolean = this.Usuario.logedIn;
+  // logedIn: Boolean = true;
+  logedIn: Boolean = this.Usuario.logedIn;
   nome_usuario?: string = this.Usuario.nome_usuario 
   usuario!:any
   carregarUsuario(){
