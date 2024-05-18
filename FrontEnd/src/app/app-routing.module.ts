@@ -61,6 +61,10 @@ const routes: Routes = [
   {
     path: 'termos',
     loadChildren: () => import('./pages/termos/termos.module').then( m => m.TermosPageModule)
+  },
+  {
+    path: 'codigo-arduino/:id_arduino',
+    loadChildren: () => import('./pages/codigo-arduino/codigo-arduino.module').then( m => m.CodigoArduinoPageModule)
   }
 ];
 
