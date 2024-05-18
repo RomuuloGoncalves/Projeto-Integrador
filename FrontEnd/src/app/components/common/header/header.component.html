@@ -37,6 +37,19 @@
           </ion-row>
         </ion-label>
       </ion-item>
+
+      <ion-accordion-group>
+        <ion-accordion value="first">
+          <ion-item slot="header" color="light">
+            <ion-label>Termos e uso</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <ion-item [routerLink]="['/privacidade']" routerDirection="back">Privacidade</ion-item>
+            <ion-item [routerLink]="['/termos']" routerDirection="back">Termos</ion-item>
+            <ion-item [routerLink]="['/cookies']" routerDirection="back">Cookies</ion-item>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
     </ion-list>
   </ion-content>
 
