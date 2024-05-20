@@ -28,7 +28,7 @@ export class CodigoArduinoPage implements OnInit {
   id_usuario: any = this.Usuario.id_usuario;
   quantidade_arduinos = 0;
   generatedCode: string = '';
-  id_arduino!:number
+  id_arduino!: number
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.id_arduino = (params['id_arduino']);
