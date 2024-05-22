@@ -91,3 +91,24 @@ INSERT INTO dados_sensores (valor, id_sensor, data_coleta) VALUES
 (22, 5, DATE_SUB(CURDATE(), INTERVAL 2 DAY)),
 (20, 1, DATE_SUB(CURDATE(), INTERVAL 1 DAY)),
 (28, 2, CURDATE());
+
+-- Gerando 200 dados aleatórios para os últimos dois anos
+DELIMITER $$
+CREATE PROCEDURE InsertSensorData()
+BEGIN
+  DECLARE i INT DEFAULT 0;
+  WHILE i < 200 DO
+    INSERT INTO dados_sensores (valor, id_sensor, data_coleta)
+    VALUES (
+      FLOOR(10 + RAND() * 30),  -- valor aleatório entre 10 e 40
+      FLOOR(1 + RAND() * 5),  -- id_sensor aleatório entre 1 e 5
+      DATE_SUB(CURDATE(), INTERVAL FLOOR(1 + RAND() * 730) DAY)  -- data_coleta aleatória nos últimos 730 dias (2 anos)
+    );
+    SET i = i + 1;
+  END WHILE;
+END$$
+DELIMITER ;
+
+-- Chamar a procedure
+CALL InsertSensorData();
+

@@ -6,11 +6,11 @@ import { ToastService } from 'src/app/services/toast.service';
 Chart.register(...registerables);
 
 @Component({
-  selector: 'app-grafico-ar',
-  templateUrl: './grafico-ar.component.html',
-  styleUrls: ['./grafico-ar.component.scss'],
+  selector: 'app-grafico-ar-ano',
+  templateUrl: './grafico-ar-ano.component.html',
+  styleUrls: ['./grafico-ar-ano.component.scss'],
 })
-export class GraficoArComponent  implements OnInit {
+export class GraficoArAnoComponent  implements OnInit {
 
   constructor(private DadosSensores: DadosSensoresService, private Toast: ToastService, private router: Router) { }
 
@@ -20,10 +20,11 @@ export class GraficoArComponent  implements OnInit {
 
   erros: any = {};
   loading: boolean = false;
+  dadosSensores: any = {};
 
   coletarDados(){
     this.loading = true;
-    this.DadosSensores.coletarDadosSensores().subscribe(
+    this.DadosSensores.coletarDadosSensoresAnos().subscribe(
       response => {
         console.log(response);
         this.loading = false;
@@ -31,7 +32,8 @@ export class GraficoArComponent  implements OnInit {
         const tipo = 'success';
         const mensagem = 'O gráfico foi gerado com sucesso';
         this.Toast.mostrarToast(tipo, mensagem);
-        this.gerarGrafico(response)
+        this.dadosSensores = response;
+        this.gerarGrafico();
 
 
         },
@@ -46,24 +48,24 @@ export class GraficoArComponent  implements OnInit {
     );
 
   }
-  gerarGrafico(response:any) {
-    const diasDaSemana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+  gerarGrafico() {
+    // const diasDaSemana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
 
-    const semanalmente = new Chart('grafico__ar', {
-      type: 'line',
+    const semanalmente = new Chart('grafico__ar__ano', {
+      type: 'bar',
       data: {
-        labels: diasDaSemana,
+        // labels: diasDaSemana,
         datasets: [
           {
-            label: 'Semana atual',
-            data: response.atual,
+            label: 'Ano atual',
+            data: this.dadosSensores.atual,
             backgroundColor: '#321dcf',
             borderColor: '#321dcf',
             borderWidth: 2
           },
           {
-            label: 'Semana passada',
-            data: response.anterior,
+            label: 'Ano passado',
+            data: this.dadosSensores.passado,
             backgroundColor: '#d41919',
             borderColor: '#d41919',
             borderWidth: 2
@@ -80,4 +82,5 @@ export class GraficoArComponent  implements OnInit {
     });
 
   }
+
 }

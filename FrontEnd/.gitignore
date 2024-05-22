@@ -69,3 +69,4 @@ Thumbs.db
 
 #integration
 /android
+resources/android/**/*

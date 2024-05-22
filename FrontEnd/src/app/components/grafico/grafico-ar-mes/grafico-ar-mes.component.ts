@@ -4,13 +4,12 @@ import { Chart, registerables } from 'chart.js';
 import { DadosSensoresService } from 'src/app/services/dados-sensores.service';
 import { ToastService } from 'src/app/services/toast.service';
 Chart.register(...registerables);
-
 @Component({
-  selector: 'app-grafico-ar',
-  templateUrl: './grafico-ar.component.html',
-  styleUrls: ['./grafico-ar.component.scss'],
+  selector: 'app-grafico-ar-mes',
+  templateUrl: './grafico-ar-mes.component.html',
+  styleUrls: ['./grafico-ar-mes.component.scss'],
 })
-export class GraficoArComponent  implements OnInit {
+export class GraficoArMesComponent  implements OnInit {
 
   constructor(private DadosSensores: DadosSensoresService, private Toast: ToastService, private router: Router) { }
 
@@ -23,9 +22,9 @@ export class GraficoArComponent  implements OnInit {
 
   coletarDados(){
     this.loading = true;
-    this.DadosSensores.coletarDadosSensores().subscribe(
+    this.DadosSensores.coletarDadosSensoresMes().subscribe(
       response => {
-        console.log(response);
+        console.log('Dados do mês', response);
         this.loading = false;
         
         const tipo = 'success';
@@ -47,23 +46,23 @@ export class GraficoArComponent  implements OnInit {
 
   }
   gerarGrafico(response:any) {
-    const diasDaSemana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+    const semanas_mes = ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'];
 
-    const semanalmente = new Chart('grafico__ar', {
+    const mensalmente = new Chart('grafico__ar__mes', {
       type: 'line',
       data: {
-        labels: diasDaSemana,
+        labels: semanas_mes,
         datasets: [
           {
-            label: 'Semana atual',
-            data: response.atual,
+            label: 'Mês atual',
+            data: response.ultimas_quatro_semanas,
             backgroundColor: '#321dcf',
             borderColor: '#321dcf',
             borderWidth: 2
           },
           {
-            label: 'Semana passada',
-            data: response.anterior,
+            label: 'Mês passado',
+            data: response.quatro_semanas_anteriores,
             backgroundColor: '#d41919',
             borderColor: '#d41919',
             borderWidth: 2
@@ -80,4 +79,6 @@ export class GraficoArComponent  implements OnInit {
     });
 
   }
+
+
 }

@@ -10,6 +10,8 @@ import { GraficoPage } from './grafico.page';
 import { HeaderModule } from 'src/app/components/common/header/header.module';
 import { GraficoArComponent } from 'src/app/components/grafico/grafico-ar/grafico-ar.component';
 import { FooterModule } from 'src/app/components/common/footer/footer.module';
+import { GraficoArAnoComponent } from 'src/app/components/grafico/grafico-ar-ano/grafico-ar-ano.component';
+import { GraficoArMesComponent } from 'src/app/components/grafico/grafico-ar-mes/grafico-ar-mes.component';
 
 @NgModule({
   imports: [
@@ -20,6 +22,6 @@ import { FooterModule } from 'src/app/components/common/footer/footer.module';
     HeaderModule,
     FooterModule
   ],
-  declarations: [GraficoPage, GraficoArComponent]
+  declarations: [GraficoPage, GraficoArComponent, GraficoArAnoComponent, GraficoArMesComponent]
 })
 export class GraficoPageModule {}

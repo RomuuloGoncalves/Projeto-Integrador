@@ -11,4 +11,12 @@ export class DadosSensoresService {
   coletarDadosSensores() {
     return this.Server.get(`/views/dados_sensores/listar.php`);
   }
+
+  coletarDadosSensoresMes() {
+    return this.Server.get(`/views/dados_sensores/listar_mes.php`);
+  }
+
+  coletarDadosSensoresAnos() {
+    return this.Server.get(`/views/dados_sensores/listar_ano.php`);
+  }
 }

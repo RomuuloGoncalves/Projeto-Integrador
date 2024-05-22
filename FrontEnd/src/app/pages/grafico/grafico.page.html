@@ -3,7 +3,8 @@
 
   <ion-row class="ion-align-items-center ion-justify-content-center">
     <ion-col size="12" sizeMd="8">
-      <ion-select aria-label="Filtro" interface="popover" placeholder="Selecione o periodo">
+      <ion-select color="dark" fill="outline" aria-label="Filtro" interface="popover" placeholder="Selecione o periodo"
+        (ionChange)="filtrarSelecao($event)" interface="popover" [multiple]="true" [(ngModel)]="selectedOptions">
         <ion-select-option value="semana">Semana</ion-select-option>
         <ion-select-option value="mes">Mês</ion-select-option>
         <ion-select-option value="ano">Ano</ion-select-option>
@@ -11,11 +12,33 @@
     </ion-col>
   </ion-row>
 
+  <ng-container *ngIf="this.filtrar['semana']"> 
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col size="12" sizeMd="8">
+        <ion-label>Gráfico da semanal</ion-label>
+        <app-grafico-ar></app-grafico-ar>
+      </ion-col>
+    </ion-row>
+  </ng-container>
+
+  <ng-container *ngIf="this.filtrar['mes']">
+
   <ion-row class="ion-justify-content-center ion-align-items-center">
     <ion-col size="12" sizeMd="8">
-      <app-grafico-ar></app-grafico-ar>
+      <ion-label>Gráfico da mensal</ion-label>
+      <app-grafico-ar-mes></app-grafico-ar-mes>
     </ion-col>
   </ion-row>
+</ng-container>
+
+<ng-container *ngIf="this.filtrar['ano']">
+  <ion-row class="ion-justify-content-center ion-align-items-center">
+    <ion-col size="12" sizeMd="8">
+      <ion-label>Gráfico da anual</ion-label>
+      <app-grafico-ar-ano></app-grafico-ar-ano>
+    </ion-col>
+  </ion-row>
+</ng-container>
 
   <!-- <ion-row class="ion-justify-content-center ion-align-items-center">
     <ion-col size="12" sizeMd="8">
