@@ -9,8 +9,8 @@ CREATE TABLE usuario (
     email VARCHAR(50) NOT NULL,
     telefone VARCHAR(50) NOT NULL,
     senha VARCHAR(50) NOT NULL, 
-    imagem VARCHAR(250) DEFAULT 'https://ionicframework.com/docs/img/demos/avatar.svg'
-
+    imagem VARCHAR(250) DEFAULT './assets/img/default/avatar_default.svg'
+    -- imagem VARCHAR(250) DEFAULT 'https://ionicframework.com/docs/img/demos/avatar.svg'
     -- FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 
@@ -59,7 +59,7 @@ ADD FOREIGN KEY (id_sensor) REFERENCES sensores(id_sensor);
 
 -- Inserções na tabela 'usuario'
 INSERT INTO usuario (nome, email, telefone, senha) VALUES 
-('a', 'a', '1111111111', 'asdfasdf'),
+('a', 'a@a.a', '1111111111', 'asdfasdf'),
 ('João Silva', 'joao@example.com', '123456789', 'senha123'),
 ('Maria Santos', 'maria@example.com', '987654321', 'senha456'),
 ('Pedro Oliveira', 'pedro@example.com', '456789123', 'senha789'),

@@ -28,14 +28,15 @@ export class CodigoArduinoPage implements OnInit {
   id_usuario: any = this.Usuario.id_usuario;
   quantidade_arduinos = 0;
   generatedCode: string = '';
-  id_arduino!: number
+  id_arduino!: number;
+
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.id_arduino = (params['id_arduino']);
     });
 
     this.listagemArduino(this.id_arduino);
-    console.log(this.id_arduino)
+    console.log(this.id_arduino);
   }
 
   listagemArduino(id: number) {
@@ -45,7 +46,7 @@ export class CodigoArduinoPage implements OnInit {
         this.arduinos = response;
         this.loading = false;
         this.quantidade_arduinos = this.arduinos.length;
-        this.Toast.mostrarToast('success', 'Listagem dos arduínos concluida');
+        this.Toast.mostrarToast('success', 'Listagem dos arduínos concluída');
         this.generateArduinoCode();
       },
       error => {
@@ -67,6 +68,16 @@ const char* ssid = "your-ssid";
 const char* password = "your-password";
 const char* serverAddress = "https://amused-hopelessly-tetra.ngrok-free.app/Projeto-Integrador/System";
 
+`;
+
+    this.arduinos.forEach((arduino: any) => {
+      arduino.sensores.forEach((sensor: any) => {
+        const sensorName = sensor.nome.replace(/\s+/g, '_').toUpperCase();
+        code += `#define ${sensorName}_PIN ${sensor.pino}\n`;
+      });
+    });
+
+    code += `
 void setup() {
   Serial.begin(115200);
   Serial.println("Hello, ESP32!");
@@ -77,8 +88,16 @@ void setup() {
     Serial.print(".");
   }
   Serial.println("Connected to WiFi");
-}
+`;
 
+    this.arduinos.forEach((arduino: any) => {
+      arduino.sensores.forEach((sensor: any) => {
+        const sensorName = sensor.nome.replace(/\s+/g, '_').toUpperCase();
+        code += `  pinMode(${sensorName}_PIN, INPUT);\n`;
+      });
+    });
+
+    code += `}
 void loop() {
   if (WiFi.status() == WL_CONNECTED) {
     HTTPClient http;
@@ -90,11 +109,13 @@ void loop() {
 
     this.arduinos.forEach((arduino: any) => {
       arduino.sensores.forEach((sensor: any, index: number) => {
+        const sensorName = sensor.nome.replace(/\s+/g, '_');
+        const sensorNameUpper = sensorName.toUpperCase();
         code += `
-    int ${sensor.nome}Value = analogRead(${sensor.pino});
+    int ${sensorName}Value = analogRead(${sensorNameUpper}_PIN);
     JsonObject sensor${index + 1}Data = data.createNestedObject();
     sensor${index + 1}Data["id_sensor"] = ${sensor.id_sensor};
-    sensor${index + 1}Data["valor"] = ${sensor.nome}Value;
+    sensor${index + 1}Data["valor"] = ${sensorName}Value;
         `;
       });
     });

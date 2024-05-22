@@ -1,29 +1,38 @@
 <ion-content [fullscreen]="true">
   <app-header></app-header>
   <ion-row class="ion-justify-content-center ion-align-items-center main">
+    <ion-col size="12" sizeMd="10">
+      <ion-row class="ion-text-md-ion-justify-content-start">
+        <ion-button size="large" fill="outline" color="dark" [routerLink]="['/perfil']" routerDirection="back">
+          <ion-icon name="arrow-back-outline"></ion-icon> Voltar
+        </ion-button>
+      </ion-row>
+    </ion-col>
+
+    <ion-col size="12" sizeMd="10">
+      <ion-row class="ion-justify-content-center ion-text-md-ion-justify-content-start">
+        <ion-label class="cadastro__logo"><a class="cadastro__link">Adicionar Sensor</a></ion-label>
+      </ion-row>
+    </ion-col>
+
     <ion-col size="10" sizeMd="8" sizeLg="5">
-      <ion-col size="12" sizeMd="4">
-        <ion-row class="ion-justify-content-center ion-text-md-ion-justify-content-start">
-          <h1 class="cadastro__logo"><a class="cadastro__link">Adicionar sensor</a></h1>
-        </ion-row>
-      </ion-col>
       <ion-row>
         <ion-col>
           <form #cadastroForm="ngForm" (ngSubmit)="this.cadastrar()">
             <ion-row class="input-container">
-              <ion-input ngModel name="nome" label="Nome:" label-placement="floating" errorText="Nome é obrigatório"
+              <ion-input ngModel name="nome" color="dark" label="Nome:" label-placement="floating" errorText="Nome é obrigatório"
                 type="text" fill="outline" required></ion-input>
               <!-- <ion-text class="erro" color="danger">erro</ion-text> -->
             </ion-row>
 
             <ion-row class="input-container">
-              <ion-input ngModel name="pino" errorText="pino inválido"
+              <ion-input ngModel name="pino" color="dark" errorText="pino inválido"
                 label="Pino:" label-placement="floating" fill="outline" type="number" required></ion-input>
               <!-- <ion-text class="erro" color="danger">erro</ion-text> -->
             </ion-row>
 
             <ion-row class="input-container">
-              <ion-select ngModel name="id_arduino" aria-label="Arduino:" interface="popover" placeholder="Escolha em qual arduíno o sensor está conectado">
+              <ion-select ngModel name="id_arduino" color="dark" aria-label="Arduino:" fill="outline" interface="popover" placeholder="Escolha em o arduíno">
                 <ng-container *ngFor="let arduino of this.arduinos">
                   <ion-select-option value="{{arduino?.id_arduino}}">{{arduino?.nome}}</ion-select-option>
                 </ng-container>

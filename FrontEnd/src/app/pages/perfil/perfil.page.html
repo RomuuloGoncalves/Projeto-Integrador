@@ -5,7 +5,7 @@
       <ion-row class="ion-justify-content-center ion-align-items-center">
         <ion-col size="auto" id="trigger-button">
           <ion-avatar>
-            <img alt="Avatar" src="{{this.usuario?.imagem}}" />
+            <ion-img alt="avatar" src="{{this.usuario?.imagem}}"></ion-img>
           </ion-avatar>
         </ion-col>
 
@@ -110,11 +110,13 @@
                           </ion-button>
                         </ion-col>
 
-                        <ion-col size="auto">
+                        <!-- Editar sensor -->
+                        
+                        <!-- <ion-col size="auto">
                           <ion-button expand="block" size="small" fill="oultine" color="dark">
                             <ion-icon size="large" name="create-outline"></ion-icon>
                           </ion-button>
-                        </ion-col>
+                        </ion-col> -->
 
                         <ion-col size="auto">
                           <ion-button (click)="mostrarAlertaExcluirArduino(arduino!.id_arduino)" expand="block"
@@ -139,11 +141,13 @@
 
                       <ion-col size="auto">
                         <ion-row>
-                          <ion-col size="auto">
+                          <!-- Editar sensor -->
+                          
+                          <!-- <ion-col size="auto">
                             <ion-button expand="block" color="success">
                               <ion-icon size="small" name="create-outline"></ion-icon>
                             </ion-button>
-                          </ion-col>
+                          </ion-col> -->
 
                           <ion-col size="auto">
                             <ion-button (click)="mostrarAlertaExcluirSensor(sensor!.id_sensor)" expand="block"

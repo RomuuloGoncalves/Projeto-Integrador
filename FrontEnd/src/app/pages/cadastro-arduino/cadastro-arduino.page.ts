@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ArduinoService } from 'src/app/services/arduino.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -13,7 +14,7 @@ export class CadastroArduinoPage implements OnInit {
 
   @ViewChild('cadastroForm') private cadastoForm!: NgForm;
 
-  constructor(private Arduino: ArduinoService, private Toast: ToastService, private Usuario: UsuarioService) { }
+  constructor(private Arduino: ArduinoService, private Toast: ToastService, private Usuario: UsuarioService, private router: Router) { }
   id_usuario = this.Usuario.id_usuario
   erros: any = {};
   loading: boolean = false;
@@ -33,6 +34,12 @@ export class CadastroArduinoPage implements OnInit {
         const tipo = 'success';
         const mensagem = 'Cadastro realizado com sucesso';
         this.Toast.mostrarToast(tipo, mensagem);
+
+        this.cadastoForm.reset();
+        this.router.navigate(['/cadastro-sensor']);
+        setTimeout(() => {
+          location.reload();
+        }, 200);
       },
       error => {
         console.error('Erro ao cadastrar os dados:', error);

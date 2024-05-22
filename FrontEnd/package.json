@@ -31,6 +31,7 @@
     "@maskito/angular": "^2.2.0",
     "@maskito/core": "^2.2.0",
     "angular-chart.js": "^1.1.0",
+    "angular-cli-ghpages": "^2.0.0-beta.2",
     "chart.js": "^4.4.2",
     "ionicons": "^7.0.0",
     "ngx-cookie-service": "^17.1.0",
