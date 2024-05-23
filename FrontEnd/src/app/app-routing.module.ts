@@ -64,7 +64,8 @@ const routes: Routes = [
   },
   {
     path: 'codigo-arduino/:id_arduino',
-    loadChildren: () => import('./pages/codigo-arduino/codigo-arduino.module').then( m => m.CodigoArduinoPageModule)
+    loadChildren: () => import('./pages/codigo-arduino/codigo-arduino.module').then( m => m.CodigoArduinoPageModule),
+    canActivate: [LogedGuard]
   }
 ];
 
