@@ -5,8 +5,14 @@
       <ion-button expand="block" fill="outline" color="dark" size="large" (click)="copyToClipboard()">Copiar</ion-button>
     </ion-col>
   </ion-row>
-  <ion-row class="ion-justify-content-center ion-margin">
-    <ion-col class="codigo" size="12" sizeMd="11">
+  <ion-row class="ion-justify-content-center ion-margin-vertical">
+    <ion-col size="11">
+      <ion-row class="ion-margin-vertical">
+        <ion-label >Código para implementação</ion-label>
+      </ion-row>
+    </ion-col>
+
+    <ion-col class="codigo" size="11">
       <pre>
         <code>
         {{ generatedCode }}
