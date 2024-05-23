@@ -5,10 +5,10 @@
 
 #define MQ9_PIN 34
 
-const char *ssid = "TP-Link_441C";
-const char *password = "99967888";
+const char *ssid = "Romulo";
+const char *password = "12345678";
 
-const char *serverAddress = "https://amused-hopelessly-tetra.ngrok-free.app/Projeto-Integrador/System/views/dados/cadastro.php";
+const char *serverAddress = "http://192.168.131.213/Projeto-Integrador/System/views/dados/cadastro.php";
 
 void setup(){
   pinMode(MQ9_PIN, INPUT);
